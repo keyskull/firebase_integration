@@ -20,15 +20,15 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - name: Checkout Code
-        uses: actions/checkout@v2
-
+      #      - name: Checkout Code
+      #        uses: actions/checkout@v2
+      #        with:
+      #          - ref: gh-pages
       - name: Check Out Public Repository
-        uses: andstor/copycat-action@v3
+        uses: adrianjost/files-sync-action@v1.0.1
         with:
-          personal_token: ${{secrets.SYNCED_GITHUB_TOKEN}}
-          src_path: /.
-          src_branch: gh-pages
-          dst_path: /.
-          dst_owner: keyskull
-          dst_repo_name: keyskull.github.io
+          FILE_PATTERNS: |
+            ^*
+          TARGET_REPOS: |
+            keyskull/keyskull.github.io
+          GITHUB_TOKEN: ${{secrets.SYNCED_GITHUB_TOKEN}}
