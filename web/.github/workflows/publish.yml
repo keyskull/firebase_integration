@@ -28,7 +28,7 @@ jobs:
         uses: adrianjost/files-sync-action@v1.0.1
         with:
           FILE_PATTERNS: |
-            ^*
+            \S
           TARGET_REPOS: |
             keyskull/keyskull.github.io
           GITHUB_TOKEN: ${{secrets.SYNCED_GITHUB_TOKEN}}
