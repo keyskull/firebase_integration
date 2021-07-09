@@ -20,9 +20,10 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - name: Checkout Code
-        uses: actions/checkout@v2
-
+#      - name: Checkout Code
+#        uses: actions/checkout@v2
+#        with:
+#          - ref: gh-pages
       - name: Check Out Public Repository
         uses: andstor/copycat-action@v3
         with:
@@ -32,3 +33,5 @@ jobs:
           dst_path: /.
           dst_owner: keyskull
           dst_repo_name: keyskull.github.io
+          username: keyskull
+          email: a410615903@gmail.com
