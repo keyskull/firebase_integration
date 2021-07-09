@@ -33,8 +33,8 @@ class Contact extends StatelessWidget {
                   style: TextStyle(fontSize: 30, fontWeight: FontWeight.w900),
                 ),
                 Container(
-                  width: ScreenSize.getScreenSize.width * 0.6,
-                  height: ScreenSize.getScreenSize.width * 0.6,
+                  width: ScreenSize.getScreenSize.height * 0.6,
+                  height: ScreenSize.getScreenSize.height * 0.6,
                   decoration: BoxDecoration(
                       image: DecorationImage(
                           fit: BoxFit.cover,

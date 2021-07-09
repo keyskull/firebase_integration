@@ -1,10 +1,10 @@
 {
     "name": "Jialin Li's Portfolio",
-    "short_name": "JLP",
+    "short_name": "Jialin Li's Portfolio",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
+    "background_color": "#404040",
+    "theme_color": "#404040",
     "description": "Jialin Li's Portfolio",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,

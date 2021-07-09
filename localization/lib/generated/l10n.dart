@@ -299,6 +299,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Newest Articles`
+  String get newest_articles {
+    return Intl.message(
+      'Newest Articles',
+      name: 'newest_articles',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

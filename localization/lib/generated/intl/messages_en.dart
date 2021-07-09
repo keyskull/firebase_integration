@@ -43,6 +43,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "my_github": MessageLookupByLibrary.simpleMessage("My Github"),
         "my_linkedin_profile":
             MessageLookupByLibrary.simpleMessage("My Linkedin Profile"),
+        "newest_articles":
+            MessageLookupByLibrary.simpleMessage("Newest Articles"),
         "privacy_policy":
             MessageLookupByLibrary.simpleMessage("Privacy Policy"),
         "quick_access": MessageLookupByLibrary.simpleMessage("Quick Access"),
