@@ -3,9 +3,9 @@ import 'dart:ui';
 import 'package:cullen/ui/components/bottom/footer.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:utilities/widgets/scroll_view/universal_single_child_scroll_view.dart';
 
 import '../../../components/buttons/blog_page_button.dart';
+import '../../window_layer.dart';
 
 void main() {
   runApp(Blog());
@@ -79,13 +79,16 @@ class BlogHeader extends StatelessWidget {
 
 double position = 0;
 
-class BlogPage extends StatefulWidget {
+class BlogPage extends StatefulWidget with DirectInterface {
   final ValueChanged<String>? handler;
 
   BlogPage({this.handler});
 
   @override
   _BlogPageState createState() => _BlogPageState();
+
+  @override
+  bool isScrollable() => true;
 }
 
 class _BlogPageState extends State<BlogPage> with TickerProviderStateMixin {
@@ -100,9 +103,8 @@ class _BlogPageState extends State<BlogPage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return UniversalSingleChildScrollView(
-        child: Column(
-      children: [BlogTopicChips(), Footer()],
-    ));
+    return Column(
+      children: [BlogHeader(), BlogTopicChips(), Footer()],
+    );
   }
 }

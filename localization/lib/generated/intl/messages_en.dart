@@ -57,6 +57,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "terms_of_service":
             MessageLookupByLibrary.simpleMessage("Terms of Service"),
         "title": MessageLookupByLibrary.simpleMessage("Jialin Li\'s Portfolio"),
-        "website": MessageLookupByLibrary.simpleMessage("Website")
+        "website": MessageLookupByLibrary.simpleMessage("Website"),
+        "website_status": MessageLookupByLibrary.simpleMessage("Website Status")
       };
 }

@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:after_layout/after_layout.dart';
+import 'package:cullen/ui/views/window_layer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:localization/generated/l10n.dart';
@@ -87,9 +88,13 @@ class DecorationLayerState extends State<DecorationLayer>
             ]);
     return Scaffold(
       appBar: appBar,
-      body: Stack(
-          alignment: Alignment.topCenter,
-          children: [child, LicenseInformationBottomBar(), CookieBar()]),
+      body: Stack(alignment: Alignment.topCenter, children: [
+        child is DirectInterface
+            ? WindowLayer(child: child as DirectInterface)
+            : child,
+        LicenseInformationBottomBar(),
+        CookieBar()
+      ]),
     );
   }
 

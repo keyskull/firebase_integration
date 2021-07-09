@@ -28,19 +28,19 @@ class InitRouter {
 
     RouteInstance(
         routePath: "",
-        title: 'NumFlurry Nonprofit Organization',
+        title: S.of(context).home_page_name,
         pageBuilder: (_, __) =>
             home.loadLibrary().then((value) => home.Home()));
     RouteInstance(
         routePath: "home",
-        title: 'NumFlurry Nonprofit Organization',
+        title: S.of(context).home_page_name,
         pageBuilder: (_, __) =>
             home.loadLibrary().then((value) => home.Home()));
     RouteInstance(routePath: "blog", title: 'Blog', pageBuilder: blogBuilder);
 
     RouteInstance(
         routePath: "about-me",
-        title: 'About Me',
+        title: S.of(context).about_me,
         pageBuilder: (_, __) =>
             aboutMe.loadLibrary().then((value) => aboutMe.AboutMe()));
 
@@ -55,14 +55,13 @@ class InitRouter {
         title: 'Disclaimer',
         pageBuilder: (_, __) => htmlToPage
             .loadLibrary()
-            .then((value) => htmlToPage.htmlToPage('disclaimer.html')));
+            .then((value) => htmlToPage.HtmlToPage(path: 'disclaimer.html')));
 
     RouteInstance(
         routePath: "cookie-policy",
         title: 'Cookie Policy',
-        pageBuilder: (_, __) => htmlToPage
-            .loadLibrary()
-            .then((value) => htmlToPage.htmlToPage('cookie-policy.html')));
+        pageBuilder: (_, __) => htmlToPage.loadLibrary().then(
+            (value) => htmlToPage.HtmlToPage(path: 'cookie-policy.html')));
 
     // RouteInstance(
     //     routePath: "test",

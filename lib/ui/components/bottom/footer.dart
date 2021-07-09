@@ -63,7 +63,11 @@ class Footer extends StatelessWidget {
                                 .changePath("about-the-webpages"),
                         style: buttonStyle,
                         child: _text(S.of(context).about_the_webpages)),
-                    Container(),
+                    TextButton(
+                        onPressed: () => launch(
+                            "https://stats.uptimerobot.com/vDYQ8hWXoM/788299671"),
+                        style: buttonStyle,
+                        child: _text(S.of(context).website_status)),
                     TextButton(
                         onPressed: () =>
                             Provider.of<PathHandler>(context, listen: false)

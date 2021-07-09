@@ -66,9 +66,8 @@ class RouteInstance {
           parameters: parameters,
           routePath: routePath,
         )),
-        child: decorationLayer(
-            child: AsyncLoadPage(
-                future: pageBuilder(parameters, extraInformation)),
-            appBar: appBar));
+        child: AsyncLoadPage(
+            future: pageBuilder(parameters, extraInformation).then(
+                (value) => decorationLayer(child: value, appBar: appBar))));
   }
 }

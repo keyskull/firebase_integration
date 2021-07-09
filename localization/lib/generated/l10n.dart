@@ -309,6 +309,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Website Status`
+  String get website_status {
+    return Intl.message(
+      'Website Status',
+      name: 'website_status',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

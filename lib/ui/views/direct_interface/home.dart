@@ -103,34 +103,27 @@ class _HomeState extends State<Home> {
     final List<Widget> content = [...recentProject, ...newestArticles];
 
     return Container(
-        decoration: BoxDecoration(
-            color: Colors.black87,
-            image: DecorationImage(
-              colorFilter: ColorFilter.mode(Colors.black54, BlendMode.darken),
-              image: AssetImage("images/4703133.jpg"),
-              fit: BoxFit.cover,
-            )),
-        child: NestedScrollView(
-          controller: scrollController,
-          headerSliverBuilder: (context, innerBoxIsScrolled) {
-            return <Widget>[
-              homePageCover(
-                  context: context, scrollController: scrollController)
-            ];
-          },
-          body: CustomScrollView(
-            slivers: [
-              ...content,
-              SliverList(delegate: SliverChildListDelegate([Footer()]))
-            ],
-          ),
+      decoration: BoxDecoration(
+          image: DecorationImage(
+        colorFilter: ColorFilter.mode(Colors.black54, BlendMode.darken),
+        image: AssetImage("images/4703133.jpg"),
+        fit: BoxFit.cover,
+      )),
+      child: CustomScrollView(
+        controller: scrollController,
+        slivers: [
+          homePageCover(context: context, scrollController: scrollController),
+          ...content,
+          SliverList(delegate: SliverChildListDelegate([Footer()]))
+        ],
+      ),
 
-          // SliverFixedExtentList(
-          //   itemExtent: 110000.0,
-          //   delegate: SliverChildListDelegate(
-          //     [HistoryTimeline(steps: LifeHistory.lifeHistory())],
-          //   ),
-          // ),
-        ));
+      // SliverFixedExtentList(
+      //   itemExtent: 110000.0,
+      //   delegate: SliverChildListDelegate(
+      //     [HistoryTimeline(steps: LifeHistory.lifeHistory())],
+      //   ),
+      // ),
+    );
   }
 }
