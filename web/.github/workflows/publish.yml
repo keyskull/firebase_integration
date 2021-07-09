@@ -27,8 +27,9 @@ jobs:
       - name: Check Out Public Repository
         uses: adrianjost/files-sync-action@v1.0.1
         with:
+          SRC_REPO: keyskull/cullen.ml:gh-pages
           FILE_PATTERNS: |
             \S
           TARGET_REPOS: |
-            keyskull/keyskull.github.io
+            keyskull/keyskull.github.io:gh-pages
           GITHUB_TOKEN: ${{secrets.SYNCED_GITHUB_TOKEN}}
