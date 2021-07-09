@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "680585822867",
+    "project_id": "cullen-4d70f",
+    "storage_bucket": "cullen-4d70f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:680585822867:android:414510bfedaa7020b40366",
+        "android_client_info": {
+          "package_name": "ml.cullen"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "680585822867-8kttoqq64r7lfhuoquvc5rsdt7vgg2a3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFWLPdvFAvzwNyZRx5R0-8e29orrw9A88"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "680585822867-8kttoqq64r7lfhuoquvc5rsdt7vgg2a3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
