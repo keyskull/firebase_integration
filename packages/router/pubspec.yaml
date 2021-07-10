@@ -14,18 +14,10 @@ dependencies:
 
 
   firebase_integration:
-#    git:
-#      url: https://github.com/NumFlurry/numflurry.github.io.git
-#      path: firebase_integration
-#      ref: main
       path: ../firebase_integration
 
 
   utilities:
-#        git:
-#          url: https://github.com/NumFlurry/numflurry.github.io.git
-#          path: utilities
-#          ref: main
     path: ../utilities
 
 #dash-overflow.net
