@@ -24,7 +24,7 @@ jobs:
       #        uses: actions/checkout@v2
       #        with:
       #          - ref: gh-pages
-      - name: Check Out Public Repository
+      - name: Files Sync Action
         uses: adrianjost/files-sync-action@v1.0.1
         with:
           FILE_PATTERNS: |
