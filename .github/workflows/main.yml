@@ -29,6 +29,7 @@ jobs:
       - name: Build Web Page
         uses: erickzanardo/flutter-gh-pages@v3
   Publish:
+      needs: Build
       runs-on: ubuntu-latest
       steps:
         # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -36,7 +37,6 @@ jobs:
           uses: actions/checkout@v2
           with:
             ref: gh-pages
-              -
         - name: Check Out Public Repository
           uses: adrianjost/files-sync-action@v1.0.1
           with:
