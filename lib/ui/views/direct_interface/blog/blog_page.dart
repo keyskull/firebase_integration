@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:cullen/ui/components/bottom/footer.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:localization/generated/l10n.dart';
 
 import '../../../components/buttons/blog_page_button.dart';
 import '../../window_layer.dart';
@@ -38,8 +39,8 @@ class BlogHeader extends StatelessWidget {
             children: [
               Flexible(
                 flex: 3,
-                child: const Text(
-                  "Welcome to Numflurry",
+                child: Text(
+                  S.of(context).blog,
                   style: TextStyle(
                     fontSize: 70,
                   ),
@@ -47,28 +48,10 @@ class BlogHeader extends StatelessWidget {
               ),
               Flexible(
                 flex: 2,
-                child: const Text(
-                  "   Welcome to NumFlurry Nonprofit Organization's website.",
+                child: Text(
+                  S.of(context).blog_description,
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
                   //maxLines: 2,
-                ),
-              ),
-              Flexible(
-                flex: 2,
-                child: Container(
-                  margin: const EdgeInsets.all(20),
-                  height: 40,
-                  width: 126,
-                  child: OutlineButton(
-                    borderSide: const BorderSide(width: 1.0),
-                    onPressed: () {
-                      // Respond to button press
-                    },
-                    child: const Text(
-                      "Get Started",
-                      style: const TextStyle(color: Colors.black),
-                    ),
-                  ),
                 ),
               ),
             ],
@@ -92,11 +75,6 @@ class BlogPage extends StatefulWidget with DirectInterface {
 }
 
 class _BlogPageState extends State<BlogPage> with TickerProviderStateMixin {
-  @override
-  void initState() {
-    super.initState();
-  }
-
   late double top;
 
   //double position = 0;

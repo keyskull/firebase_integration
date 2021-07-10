@@ -25,6 +25,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "about_me": MessageLookupByLibrary.simpleMessage("About Me"),
         "about_the_webpages":
             MessageLookupByLibrary.simpleMessage("About the Webpages"),
+        "blog": MessageLookupByLibrary.simpleMessage("Blog"),
+        "blog_description": MessageLookupByLibrary.simpleMessage(""),
         "contact_information":
             MessageLookupByLibrary.simpleMessage("Contact Information"),
         "contact_me": MessageLookupByLibrary.simpleMessage("Contact Me"),

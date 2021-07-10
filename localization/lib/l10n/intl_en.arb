@@ -26,5 +26,7 @@
   "recent_projects": "Recent Projects",
   "contact_me": "Contact Me",
   "newest_articles": "Newest Articles",
-  "website_status": "Website Status"
+  "website_status": "Website Status",
+  "blog": "Blog",
+  "blog_description": ""
 }

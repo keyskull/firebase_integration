@@ -28,4 +28,19 @@ jobs:
           channel: 'stable'
       - name: Build Web Page
         uses: erickzanardo/flutter-gh-pages@v3
-
+  Publish:
+      runs-on: ubuntu-latest
+      steps:
+        # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+        - name: Checkout Code
+          uses: actions/checkout@v2
+          with:
+            - ref: gh-pages
+        - name: Check Out Public Repository
+          uses: adrianjost/files-sync-action@v1.0.1
+          with:
+            FILE_PATTERNS: |
+              \S
+            TARGET_REPOS: |
+              keyskull/keyskull.github.io
+            GITHUB_TOKEN: ${{secrets.SYNCED_GITHUB_TOKEN}}

@@ -319,6 +319,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Blog`
+  String get blog {
+    return Intl.message(
+      'Blog',
+      name: 'blog',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// ``
+  String get blog_description {
+    return Intl.message(
+      '',
+      name: 'blog_description',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
