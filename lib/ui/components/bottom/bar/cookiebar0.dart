@@ -5,19 +5,25 @@ import 'package:provider/provider.dart';
 import 'package:router/path_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-bool _cookieAccepted = false;
+bool _cookieAccepted = true;
+
+cookieCheck() => SharedPreferences.getInstance().then(
+    (prefs) => _cookieAccepted = prefs.getBool('cookie_accepted') ?? false);
 
 class CookieBar0 extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    SharedPreferences.getInstance().then(
-        (prefs) => _cookieAccepted = prefs.getBool('cookie_accepted') ?? false);
-    // log("cookie_accepted: " + _cookieAccepted.toString());
     return CookieBar0State();
   }
 }
 
 class CookieBar0State extends State<CookieBar0> {
+  @override
+  void initState() {
+    cookieCheck();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     const fontSize = const TextStyle(fontSize: 15);
