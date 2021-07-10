@@ -12,5 +12,5 @@ class UniversalSingleChildScrollView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) =>
-      BrowserSupportedSingleChildScrollView(key: key, child: child);
+      WebSingleChildScrollView(key: key, child: child);
 }
