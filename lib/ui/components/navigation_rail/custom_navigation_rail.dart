@@ -1,6 +1,7 @@
 import 'package:cullen/properties/common.dart';
 import 'package:flutter/material.dart';
 import 'package:localization/generated/l10n.dart';
+import 'package:pointer_interceptor/pointer_interceptor.dart';
 import 'package:provider/provider.dart';
 import 'package:router/path_handler.dart';
 import 'package:router/route.dart';
@@ -212,7 +213,8 @@ class CustomNavigationRailState extends State<CustomNavigationRail>
                                 (index) => NavigationRailDestination(
                                       icon: buttonIcons[index],
                                       selectedIcon: buttonSelectedIcons[index],
-                                      label: buttonNames[index],
+                                      label: PointerInterceptor(
+                                          child: buttonNames[index]),
                                     ))),
                       ),
                     ),

@@ -4,24 +4,24 @@ import 'package:after_layout/after_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:universal_html/html.dart' as html;
 
-class BrowserSupportedSingleChildScrollView extends StatefulWidget {
+class WebSingleChildScrollView extends StatefulWidget {
   final Widget child;
 
-  BrowserSupportedSingleChildScrollView({Key? key, required this.child})
+  WebSingleChildScrollView({Key? key, required this.child})
       : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
-    return BrowserSupportedSingleChildScrollViewState(child);
+    return WebSingleChildScrollViewState(child);
   }
 }
 
-class BrowserSupportedSingleChildScrollViewState
-    extends State<BrowserSupportedSingleChildScrollView>
-    with AfterLayoutMixin<BrowserSupportedSingleChildScrollView> {
+class WebSingleChildScrollViewState
+    extends State<WebSingleChildScrollView>
+    with AfterLayoutMixin<WebSingleChildScrollView> {
   final Widget child;
 
-  BrowserSupportedSingleChildScrollViewState(this.child);
+  WebSingleChildScrollViewState(this.child);
 
   final target = html.querySelector('flt-scene-host');
   final scrollFrame = new html.DivElement();
@@ -114,7 +114,7 @@ class BrowserSupportedSingleChildScrollViewState
 
   @override
   void didUpdateWidget(
-      covariant BrowserSupportedSingleChildScrollView oldWidget) {
+      covariant WebSingleChildScrollView oldWidget) {
     super.didUpdateWidget(oldWidget);
   }
 

@@ -82,7 +82,12 @@ class Footer extends StatelessWidget {
                         onPressed: () => launch("https://github.com/keyskull"),
                         style: buttonStyle,
                         child: _text(S.of(context).my_github)),
-                    Container(),
+                    TextButton(
+                        onPressed: () =>
+                            Provider.of<PathHandler>(context, listen: false)
+                                .changePath("web_browser"),
+                        style: buttonStyle,
+                        child: _text("Web Browser")),
                     Container()
                   ],
                 ),

@@ -1,6 +1,6 @@
 import 'package:cullen/ui/components/bottom/footer.dart';
 import 'package:flutter/material.dart';
-import 'package:utilities/widgets/scroll_view/universal_single_child_scroll_view.dart';
+import 'package:universal_scroll_view/universal_single_child_scroll_view.dart';
 
 abstract class DirectInterface implements Widget {
   bool isScrollable();
