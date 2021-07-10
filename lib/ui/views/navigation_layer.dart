@@ -1,12 +1,12 @@
-import 'package:flutter/rendering.dart';
-import '../../ui/views/dialogs/contact_dialog.dart';
-import 'package:router/route.dart';
-
-import 'package:utilities/screen_size.dart';
-import '../components/navigation_rail/custom_navigation_rail.dart';
-
-import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:pointer_interceptor/pointer_interceptor.dart';
+import 'package:router/route.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:utilities/screen_size.dart';
+
+import '../components/navigation_rail/custom_navigation_rail.dart';
+import 'dialogs/stackedit_dialog.dart';
 
 class NavigationLayer extends StatefulWidget {
   final Widget child;
@@ -68,7 +68,8 @@ class _HomePageState extends State<NavigationLayer>
             Padding(
                 padding: EdgeInsets.only(
                     right: ScreenSize.getFlashScreenSize(context).width - 85),
-                child: FloatingActionButton(
+                child: PointerInterceptor(
+                    child: FloatingActionButton(
                   onPressed: () {
                     setState(() {
                       hiddenNavigation = !hiddenNavigation;
@@ -80,9 +81,10 @@ class _HomePageState extends State<NavigationLayer>
                       ? Icon(Icons.arrow_forward_ios_outlined)
                       : Icon(Icons.arrow_back_ios_outlined),
                   heroTag: "hidden",
-                )),
+                ))),
             Column(mainAxisAlignment: MainAxisAlignment.end, children: [
-              FloatingActionButton(
+              PointerInterceptor(
+                  child: FloatingActionButton(
                 mini: true,
                 onPressed: () {
                   _switchContactButtonState();
@@ -93,16 +95,17 @@ class _HomePageState extends State<NavigationLayer>
                     : Icon(Icons.email_outlined),
                 backgroundColor: Colors.blue,
                 heroTag: "btn2",
-              ),
+              )),
               SizedBox(height: 10),
-              FloatingActionButton(
+              PointerInterceptor(
+                  child: FloatingActionButton(
                 mini: true,
                 onPressed: () {
                   _switchContactButtonState();
                   if (!contactButtonExtended)
                     showDialog(
                       context: globalNavigatorKey.currentContext!,
-                      builder: (context) => ContactDialog(),
+                      builder: (context) => StackeditDialog(),
                       useSafeArea: true,
                       useRootNavigator: true,
                     );
@@ -111,7 +114,7 @@ class _HomePageState extends State<NavigationLayer>
                     ? Icon(Icons.message)
                     : Icon(Icons.message_outlined),
                 backgroundColor: Colors.blue,
-              )
+              ))
             ])
           ],
         ),
