@@ -8,7 +8,6 @@ import 'package:router/route.dart';
 import 'package:router/route_data.dart';
 import 'package:utilities/screen_size.dart';
 
-import '../../../properties/navigation_content.dart';
 import '../../../properties/navigation_rail_buttons.dart';
 
 /// This is the stateful widget that the main application instantiates.
@@ -137,16 +136,7 @@ class CustomNavigationRailState extends State<CustomNavigationRail>
         color: Colors.white,
         child: Stack(
           children: <Widget>[
-            PositionedTransition(
-              rect: _animationContent,
-              child: NotificationListener<Notification>(
-                  onNotification: (notification) {
-                    return !globalNotificationListeners.values
-                        .map((e) => e(notification))
-                        .contains(false);
-                  },
-                  child: child),
-            ),
+            PositionedTransition(rect: _animationContent, child: child),
             PositionedTransition(
                 rect: _animationNavigationRail,
                 child: Row(

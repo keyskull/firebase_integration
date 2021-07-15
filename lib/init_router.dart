@@ -1,5 +1,7 @@
+import 'package:cullen/ui/views/direct_interface/html_editor.dart';
 import 'package:firebase_integration/ui/views/login.dart' deferred as login;
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:localization/generated/l10n.dart';
 import 'package:router/route.dart';
 import 'package:web_browser/web_browser.dart' deferred as web_browser;
@@ -14,6 +16,8 @@ import 'ui/views/direct_interface/dashboard.dart' deferred as dashboard;
 import 'ui/views/direct_interface/home.dart' deferred as home;
 import 'ui/views/direct_interface/projects.dart' deferred as projects;
 import 'ui/views/direct_interface/tools.dart' deferred as tools;
+import 'ui/views/navigation_layer.dart';
+import 'ui/views/window_layer.dart';
 
 class InitRouter {
   final blogBuilder = ((parameters, _) => parameters == ''
@@ -23,6 +27,11 @@ class InitRouter {
           .then((_) => article.Article(path: parameters ?? '')));
 
   InitRouter(BuildContext context) {
+    windowsLayer = ({required Widget child}) => WindowsLayer(
+          child: child,
+        );
+    navigationLayer = ({required Widget child, AppBar? appBar}) =>
+        NavigationLayer(child: child);
     decorationLayer = ({required Widget child, AppBar? appBar}) =>
         DecorationLayer(child: child, appBar: appBar);
 
@@ -76,6 +85,18 @@ class InitRouter {
     //             ..style.border = 'none');
     //       return HtmlElementView(viewType: 'hello-world-html');
     //     });
+
+    RouteInstance(
+        routePath: "markdown",
+        title: 'Narkdown',
+        pageBuilder: (_, __) async =>
+            Markdown(data: "dadasdasdadsssssssssssssssss"));
+    RouteInstance(
+        routePath: "editor",
+        title: 'Editor',
+        pageBuilder: (_, __) async => HtmlEditorExample(
+              title: "dasdadada",
+            ));
     RouteInstance(
         routePath: "dashboard",
         title: 'Dashboard',
@@ -105,7 +126,7 @@ class InitRouter {
                         gestureNavigationEnabled: true,
                         initialMediaPlaybackPolicy:
                             web_browser.AutoMediaPlaybackPolicy.always_allow),
-                initialUrl: 'https://www.cullen.ml/Toschedule',
+                initialUrl: 'https://baidu.com',
                 javascriptEnabled: true)));
 
     RouteInstance(

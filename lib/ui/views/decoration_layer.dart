@@ -20,6 +20,7 @@ void _func() {}
 class DecorationLayer extends StatefulWidget {
   final Widget child;
   final AppBar? appBar;
+
   DecorationLayer({required this.child, this.appBar});
 
   @override
@@ -35,6 +36,9 @@ class DecorationLayerState extends State<DecorationLayer>
   DecorationLayerState({required this.child, this.appBar});
 
   var _appBarHeight = appBarHeight;
+  final routeData =
+      ((globalNavigatorKey.currentState!.widget.pages.first.key as ValueKey)
+          .value as RouteData);
 
   @override
   void initState() {
@@ -54,9 +58,6 @@ class DecorationLayerState extends State<DecorationLayer>
                     style: const TextStyle(fontWeight: FontWeight.w400),
                   )),
             );
-    final routeData =
-        ((globalNavigatorKey.currentState!.widget.pages.first.key as ValueKey)
-            .value as RouteData);
 
     final appBar = this.appBar ??
         AppBar(
@@ -86,17 +87,29 @@ class DecorationLayerState extends State<DecorationLayer>
                           .changePath("about-me"),
                   text: 'About Me')
             ]);
+
     return Scaffold(
       appBar: appBar,
       body: Stack(alignment: Alignment.topCenter, children: [
-        child is DirectInterface
-            ? WindowLayer(child: child as DirectInterface)
-            : child,
+        _notificationListener(child is SingleWindowInterface
+            ? ((child) {
+                child.initSingleWindowInterface();
+                return child.buildSingleWindowInterface();
+              }(child))
+            : child),
         LicenseInformationBottomBar(),
         CookieBar()
       ]),
     );
   }
+
+  _notificationListener(child) => NotificationListener<Notification>(
+      onNotification: (notification) {
+        return !globalNotificationListeners.values
+            .map((e) => e(notification))
+            .contains(false);
+      },
+      child: child);
 
   _registerNotificationListener() {
     globalNotificationListeners[this.hashCode.toString()] =

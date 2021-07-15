@@ -5,7 +5,7 @@ import 'package:router/path_handler.dart';
 
 import '../window_layer.dart';
 
-class AboutMe extends StatelessWidget with DirectInterface {
+class AboutMe extends StatelessWidget with SingleWindowInterface {
   final textButtonStyle = TextButton.styleFrom(
       padding: const EdgeInsets.all(10), enableFeedback: false);
 
@@ -57,5 +57,5 @@ class AboutMe extends StatelessWidget with DirectInterface {
       ));
 
   @override
-  bool isScrollable() => true;
+  bool inheritScrollingFeature() => true;
 }

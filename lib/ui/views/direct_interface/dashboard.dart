@@ -1,7 +1,7 @@
 import 'package:cullen/ui/views/window_layer.dart';
 import 'package:flutter/material.dart';
 
-class Dashboard extends StatelessWidget with DirectInterface {
+class Dashboard extends StatelessWidget with SingleWindowInterface {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -9,8 +9,8 @@ class Dashboard extends StatelessWidget with DirectInterface {
   }
 
   @override
-  bool isScrollable() {
-    // TODO: implement isScrollable
+  bool inheritScrollingFeature() {
+    // TODO: implement inheritScrollingFeature
     throw UnimplementedError();
   }
 }

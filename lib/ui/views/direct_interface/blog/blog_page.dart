@@ -62,7 +62,7 @@ class BlogHeader extends StatelessWidget {
 
 double position = 0;
 
-class BlogPage extends StatefulWidget with DirectInterface {
+class BlogPage extends StatefulWidget with SingleWindowInterface {
   final ValueChanged<String>? handler;
 
   BlogPage({this.handler});
@@ -71,7 +71,7 @@ class BlogPage extends StatefulWidget with DirectInterface {
   _BlogPageState createState() => _BlogPageState();
 
   @override
-  bool isScrollable() => true;
+  bool inheritScrollingFeature() => true;
 }
 
 class _BlogPageState extends State<BlogPage> with TickerProviderStateMixin {

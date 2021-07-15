@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:router/pages/404.dart';
 import 'package:router/ui/views/direct_interface/loading.dart';
 
-class HtmlToPage extends StatelessWidget with DirectInterface {
+class HtmlToPage extends StatelessWidget with SingleWindowInterface {
   final String path;
 
   HtmlToPage({required this.path});
@@ -31,5 +31,5 @@ class HtmlToPage extends StatelessWidget with DirectInterface {
       });
 
   @override
-  bool isScrollable() => true;
+  bool inheritScrollingFeature() => true;
 }

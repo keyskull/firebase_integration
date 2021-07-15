@@ -15,16 +15,16 @@ class NavigationLayer extends StatefulWidget {
   NavigationLayer({required this.child});
 
   @override
-  _HomePageState createState() =>
-      _HomePageState(child: child, navigationRailKey: navigationRailKey);
+  NavigationLayerState createState() =>
+      NavigationLayerState(child: child, navigationRailKey: navigationRailKey);
 }
 
-class _HomePageState extends State<NavigationLayer>
+class NavigationLayerState extends State<NavigationLayer>
     with TickerProviderStateMixin {
   final Widget child;
   final GlobalKey<CustomNavigationRailState> navigationRailKey;
 
-  _HomePageState({required this.child, required this.navigationRailKey});
+  NavigationLayerState({required this.child, required this.navigationRailKey});
 
   bool hiddenNavigation = false;
   bool contactButtonExtended = true;

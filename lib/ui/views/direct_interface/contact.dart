@@ -5,7 +5,7 @@ import 'package:localization/generated/l10n.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:utilities/screen_size.dart';
 
-class Contact extends StatelessWidget with DirectInterface {
+class Contact extends StatelessWidget with SingleWindowInterface {
   @override
   Widget build(BuildContext context) => Padding(
       padding: const EdgeInsets.only(top: 80, bottom: 30, left: 10, right: 10),
@@ -42,5 +42,5 @@ class Contact extends StatelessWidget with DirectInterface {
       ));
 
   @override
-  bool isScrollable() => true;
+  bool inheritScrollingFeature() => true;
 }

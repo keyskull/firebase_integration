@@ -16,7 +16,10 @@ typedef PageBuilder = Future<Widget> Function(
 
 Widget Function({required Widget child, AppBar? appBar}) decorationLayer =
     ({required Widget child, AppBar? appBar}) => Container(child: child);
-
+Widget Function({required Widget child}) navigationLayer =
+    ({required Widget child}) => Container(child: child);
+Widget Function({required Widget child}) windowsLayer =
+    ({required Widget child}) => Container(child: child);
 AppBar? appBar;
 
 Map<String, RouteInstance> _routeStack = {};
@@ -67,7 +70,10 @@ class RouteInstance {
           routePath: routePath,
         )),
         child: AsyncLoadPage(
-            future: pageBuilder(parameters, extraInformation).then(
-                (value) => decorationLayer(child: value, appBar: appBar))));
+            future: pageBuilder(parameters, extraInformation).then((value) =>
+                windowsLayer(
+                    child: navigationLayer(
+                        child:
+                            decorationLayer(child: value, appBar: appBar))))));
   }
 }

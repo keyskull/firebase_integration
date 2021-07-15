@@ -10,7 +10,6 @@ import 'package:router/router_delegate.dart';
 import 'package:utilities/screen_size.dart';
 
 import 'init_router.dart';
-import 'ui/views/navigation_layer.dart';
 
 class WebApp extends StatefulWidget {
   @override
@@ -32,9 +31,8 @@ class _WebAppState extends State<WebApp> with AfterLayoutMixin {
         builder: (context, Widget? child) {
           ScreenSize.initScreenSize(context);
           InitRouter(context);
-          return NavigationLayer(
-              child: child ??
-                  (InitRouterBase.unknownPage.getPage() as MaterialPage).child);
+          return child ??
+              (InitRouterBase.unknownPage.getPage() as MaterialPage).child;
         },
         localizationsDelegates: [
           S.delegate,

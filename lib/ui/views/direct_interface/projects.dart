@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../window_layer.dart';
 
-class Projects extends StatelessWidget with DirectInterface {
+class Projects extends StatelessWidget with SingleWindowInterface {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -10,8 +10,8 @@ class Projects extends StatelessWidget with DirectInterface {
   }
 
   @override
-  bool isScrollable() {
-    // TODO: implement isScrollable
+  bool inheritScrollingFeature() {
+    // TODO: implement inheritScrollingFeature
     throw UnimplementedError();
   }
 }
