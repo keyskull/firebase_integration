@@ -1,7 +1,6 @@
 import 'package:cullen/ui/components/bottom/footer.dart';
 import 'package:flutter/material.dart';
 import 'package:universal_scroll_view/universal_single_child_scroll_view.dart';
-import 'package:utilities/drag_area.dart';
 import 'package:utilities/screen_size.dart';
 
 List<SingleWindowInterface> _windows = [
