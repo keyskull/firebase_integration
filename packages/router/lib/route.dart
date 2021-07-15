@@ -69,11 +69,11 @@ class RouteInstance {
           parameters: parameters,
           routePath: routePath,
         )),
-        child: AsyncLoadPage(
-            future: pageBuilder(parameters, extraInformation).then((value) =>
-                windowsLayer(
-                    child: navigationLayer(
-                        child:
+        child: windowsLayer(
+            child: navigationLayer(
+                child: AsyncLoadPage(
+                    future: pageBuilder(parameters, extraInformation).then(
+                        (value) =>
                             decorationLayer(child: value, appBar: appBar))))));
   }
 }
