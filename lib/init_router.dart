@@ -17,7 +17,7 @@ import 'ui/views/direct_interface/home.dart' deferred as home;
 import 'ui/views/direct_interface/projects.dart' deferred as projects;
 import 'ui/views/direct_interface/tools.dart' deferred as tools;
 import 'ui/views/navigation_layer.dart';
-import 'ui/views/window_layer.dart';
+import 'ui/views/windows_layer.dart';
 
 class InitRouter {
   final blogBuilder = ((parameters, _) => parameters == ''

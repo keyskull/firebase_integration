@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../window_layer.dart';
+import '../windows_layer.dart';
 
 class Projects extends StatelessWidget with SingleWindowInterface {
   @override

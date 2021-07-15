@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:after_layout/after_layout.dart';
-import 'package:cullen/ui/views/window_layer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:localization/generated/l10n.dart';
@@ -14,6 +13,7 @@ import '../../properties/common.dart';
 import '../../properties/navigation_content.dart';
 import '../components/bottom/bar/cookiebar.dart';
 import '../components/bottom/bar/license_information_bottom_bar.dart';
+import 'windows_layer.dart';
 
 void _func() {}
 

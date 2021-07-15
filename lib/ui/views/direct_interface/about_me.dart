@@ -3,7 +3,7 @@ import 'package:localization/generated/l10n.dart';
 import 'package:provider/provider.dart';
 import 'package:router/path_handler.dart';
 
-import '../window_layer.dart';
+import '../windows_layer.dart';
 
 class AboutMe extends StatelessWidget with SingleWindowInterface {
   final textButtonStyle = TextButton.styleFrom(

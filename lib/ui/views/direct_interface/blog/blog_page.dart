@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:localization/generated/l10n.dart';
 
 import '../../../components/buttons/blog_page_button.dart';
-import '../../window_layer.dart';
+import '../../windows_layer.dart';
 
 void main() {
   runApp(Blog());

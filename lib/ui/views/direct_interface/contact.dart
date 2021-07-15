@@ -1,4 +1,4 @@
-import 'package:cullen/ui/views/window_layer.dart';
+import 'package:cullen/ui/views/windows_layer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:localization/generated/l10n.dart';

@@ -2,7 +2,7 @@ import 'dart:core';
 
 import 'package:flutter/material.dart';
 
-import '../../../views/window_layer.dart';
+import '../../../views/windows_layer.dart';
 
 class Article extends StatelessWidget with SingleWindowInterface {
   final String path;
