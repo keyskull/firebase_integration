@@ -152,72 +152,77 @@ class CustomNavigationRailState extends State<CustomNavigationRail>
                 child: Row(
                   children: [
                     Container(
-                      color: mainThemeColor,
-                      child: NavigationRailTheme(
-                        data: NavigationRailThemeData(
-                            unselectedLabelTextStyle:
-                                TextStyle(color: Colors.white)),
-                        child: NavigationRail(
-                            unselectedIconTheme:
-                                IconThemeData(color: Colors.white),
-                            selectedIconTheme:
-                                IconThemeData(color: Colors.white),
-                            backgroundColor: Colors.black54,
-                            extended: _extend,
-                            selectedIndex: _selectedIndex,
-                            onDestinationSelected: (int index) {
-                              if (_selectedIndex != index) {
-                                setState(() {
-                                  _selectedIndex = index;
-                                });
+                        color: mainThemeColor,
+                        child: PointerInterceptor(
+                          child: NavigationRailTheme(
+                            data: NavigationRailThemeData(
+                                unselectedLabelTextStyle:
+                                    TextStyle(color: Colors.white)),
+                            child: NavigationRail(
+                                unselectedIconTheme:
+                                    IconThemeData(color: Colors.white),
+                                selectedIconTheme:
+                                    IconThemeData(color: Colors.white),
+                                backgroundColor: Colors.black54,
+                                extended: _extend,
+                                selectedIndex: _selectedIndex,
+                                onDestinationSelected: (int index) {
+                                  if (_selectedIndex != index) {
+                                    setState(() {
+                                      _selectedIndex = index;
+                                    });
 
-                                Provider.of<PathHandler>(context, listen: false)
-                                    .changePath(buttonPaths[index]);
-                              } else if ((((globalNavigatorKey
-                                              .currentState!
-                                              .widget
-                                              .pages
-                                              .first
-                                              .key as ValueKey)
-                                          .value) as RouteData)
-                                      .path
-                                      .substring(1) !=
-                                  buttonPaths[index]) {
-                                Provider.of<PathHandler>(context, listen: false)
-                                    .changePath(buttonPaths[index]);
-                              }
-                            },
-                            labelType: NavigationRailLabelType.none,
-                            leading: Stack(
-                              children: [
-                                Container(
-                                    width: _width,
-                                    height: 30,
-                                    alignment: Alignment(0, 0.2),
-                                    child: SizedBox.expand(
-                                        child: Semantics(
-                                            button: true,
-                                            label: S.of(context).home_page_name,
-                                            child: IconButton(
-                                              iconSize: 25,
-                                              icon: Icon(
-                                                Icons.dehaze,
-                                                color: Colors.white,
-                                              ),
-                                              onPressed: _updateState,
-                                            )))),
-                              ],
-                            ),
-                            destinations: new List.generate(
-                                buttonNames.length,
-                                (index) => NavigationRailDestination(
-                                      icon: buttonIcons[index],
-                                      selectedIcon: buttonSelectedIcons[index],
-                                      label: PointerInterceptor(
-                                          child: buttonNames[index]),
-                                    ))),
-                      ),
-                    ),
+                                    Provider.of<PathHandler>(context,
+                                            listen: false)
+                                        .changePath(buttonPaths[index]);
+                                  } else if ((((globalNavigatorKey
+                                                  .currentState!
+                                                  .widget
+                                                  .pages
+                                                  .first
+                                                  .key as ValueKey)
+                                              .value) as RouteData)
+                                          .path
+                                          .substring(1) !=
+                                      buttonPaths[index]) {
+                                    Provider.of<PathHandler>(context,
+                                            listen: false)
+                                        .changePath(buttonPaths[index]);
+                                  }
+                                },
+                                labelType: NavigationRailLabelType.none,
+                                leading: Stack(
+                                  children: [
+                                    Container(
+                                        width: _width,
+                                        height: 30,
+                                        alignment: Alignment(0, 0.2),
+                                        child: SizedBox.expand(
+                                            child: Semantics(
+                                                button: true,
+                                                label: S
+                                                    .of(context)
+                                                    .home_page_name,
+                                                child: IconButton(
+                                                  iconSize: 25,
+                                                  icon: Icon(
+                                                    Icons.dehaze,
+                                                    color: Colors.white,
+                                                  ),
+                                                  onPressed: _updateState,
+                                                )))),
+                                  ],
+                                ),
+                                destinations: new List.generate(
+                                    buttonNames.length,
+                                    (index) => NavigationRailDestination(
+                                          icon: buttonIcons[index],
+                                          selectedIcon:
+                                              buttonSelectedIcons[index],
+                                          label: buttonNames[index],
+                                        ))),
+                          ),
+                        )),
                     VerticalDivider(thickness: 1, width: 1),
                     // This is the main content.
                   ],
