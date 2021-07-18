@@ -1,4 +1,3 @@
-import 'package:cullen/ui/views/direct_interface/html_editor.dart';
 import 'package:firebase_integration/ui/views/login.dart' deferred as login;
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
@@ -91,12 +90,7 @@ class InitRouter {
         title: 'Narkdown',
         pageBuilder: (_, __) async =>
             Markdown(data: "dadasdasdadsssssssssssssssss"));
-    RouteInstance(
-        routePath: "editor",
-        title: 'Editor',
-        pageBuilder: (_, __) async => HtmlEditorExample(
-              title: "dasdadada",
-            ));
+
     RouteInstance(
         routePath: "dashboard",
         title: 'Dashboard',

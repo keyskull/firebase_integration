@@ -1,10 +1,10 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'path_handler.dart';
-import 'route.dart';
 import 'package:provider/provider.dart';
 
+import 'path_handler.dart';
+import 'route.dart';
 
 class RouterDelegateInherit extends RouterDelegate<RoutePath>
     with ChangeNotifier, PopNavigatorRouterDelegateMixin<RoutePath> {
@@ -16,6 +16,7 @@ class RouterDelegateInherit extends RouterDelegate<RoutePath>
   RoutePath get currentConfiguration {
     return _routePath;
   }
+
   @override
   Widget build(BuildContext context) {
     handler = Provider.of<PathHandler>(context, listen: true);
@@ -34,7 +35,7 @@ class RouterDelegateInherit extends RouterDelegate<RoutePath>
         log('Pop Executed = ' + routePath.getRouteInstance.routePath,
             name: 'ml.cullen.RouterDelegateInherit');
         handler.changePath(routePath.getRouteInstance.routePath);
-        notifyListeners();
+        // notifyListeners();
         return true;
       },
     );
@@ -48,7 +49,6 @@ class RouterDelegateInherit extends RouterDelegate<RoutePath>
     handler.changePath(configuration.routeName);
     notifyListeners();
   }
-
 
   @override
   void dispose() {
