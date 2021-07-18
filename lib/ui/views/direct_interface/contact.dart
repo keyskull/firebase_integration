@@ -1,6 +1,6 @@
-import 'package:cullen/ui/views/windows_layer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
+import 'package:framework/windows/window_layer.dart';
 import 'package:localization/generated/l10n.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:utilities/screen_size.dart';
@@ -42,5 +42,5 @@ class Contact extends StatelessWidget with SingleWindowInterface {
       ));
 
   @override
-  bool inheritScrollingFeature() => true;
+  bool scrollable() => true;
 }

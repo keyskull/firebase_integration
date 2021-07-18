@@ -41,6 +41,8 @@ dependencies:
   utilities:
     path: ./packages/utilities
 
+  framework:
+    path: ./packages/framework
 
   shared_preferences: ^2.0.6
 

@@ -1,5 +1,5 @@
-import 'package:cullen/ui/views/windows_layer.dart';
 import 'package:flutter/material.dart';
+import 'package:framework/windows/window_layer.dart';
 
 class Dashboard extends StatelessWidget with SingleWindowInterface {
   @override
@@ -9,8 +9,8 @@ class Dashboard extends StatelessWidget with SingleWindowInterface {
   }
 
   @override
-  bool inheritScrollingFeature() {
-    // TODO: implement inheritScrollingFeature
+  bool scrollable() {
+    // TODO: implement scrollable
     throw UnimplementedError();
   }
 }

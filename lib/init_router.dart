@@ -1,12 +1,16 @@
+import 'package:cullen/ui/components/bottom/bar/cookiebar.dart';
 import 'package:firebase_integration/ui/views/login.dart' deferred as login;
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:framework/decoration_layer.dart';
+import 'package:framework/framework.dart';
+import 'package:framework/navigation_layer.dart';
+import 'package:framework/windows/window_layer.dart';
 import 'package:localization/generated/l10n.dart';
 import 'package:router/route.dart';
 import 'package:web_browser/web_browser.dart' deferred as web_browser;
 
 import 'tools/html_to_page.dart' deferred as htmlToPage;
-import 'ui/views/decoration_layer.dart';
 import 'ui/views/direct_interface/about_me.dart' deferred as aboutMe;
 import 'ui/views/direct_interface/blog/article_page.dart' deferred as article;
 import 'ui/views/direct_interface/blog/blog_page.dart' deferred as blog;
@@ -15,8 +19,6 @@ import 'ui/views/direct_interface/dashboard.dart' deferred as dashboard;
 import 'ui/views/direct_interface/home.dart' deferred as home;
 import 'ui/views/direct_interface/projects.dart' deferred as projects;
 import 'ui/views/direct_interface/tools.dart' deferred as tools;
-import 'ui/views/navigation_layer.dart';
-import 'ui/views/windows_layer.dart';
 
 class InitRouter {
   final blogBuilder = ((parameters, _) => parameters == ''
@@ -26,13 +28,17 @@ class InitRouter {
           .then((_) => article.Article(path: parameters ?? '')));
 
   InitRouter(BuildContext context) {
-    windowsLayer = ({required Widget child}) => WindowsLayer(
+    windowsLayer = ({required Widget child}) => WindowLayer(
           child: child,
         );
-    navigationLayer = ({required Widget child, AppBar? appBar}) =>
-        NavigationLayer(child: child);
-    decorationLayer = ({required Widget child, AppBar? appBar}) =>
-        DecorationLayer(child: child, appBar: appBar);
+    navigationLayer =
+        ({required Widget child}) => NavigationLayer(child: child);
+    decorationLayer =
+        ({required Widget child, AppBar? appBar}) => DecorationLayer(
+              child: child,
+              appBarBuilder: appBarBuilder,
+              decorations: [CookieBar()],
+            );
 
     RouteInstance(
         routePath: "",

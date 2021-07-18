@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:framework/windows/window_layer.dart';
 import 'package:localization/generated/l10n.dart';
 import 'package:provider/provider.dart';
 import 'package:router/path_handler.dart';
-
-import '../windows_layer.dart';
 
 class AboutMe extends StatelessWidget with SingleWindowInterface {
   final textButtonStyle = TextButton.styleFrom(
@@ -57,5 +56,5 @@ class AboutMe extends StatelessWidget with SingleWindowInterface {
       ));
 
   @override
-  bool inheritScrollingFeature() => true;
+  bool scrollable() => true;
 }

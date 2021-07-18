@@ -1,8 +1,7 @@
 import 'dart:core';
 
 import 'package:flutter/material.dart';
-
-import '../../../views/windows_layer.dart';
+import 'package:framework/windows/window_layer.dart';
 
 class Article extends StatelessWidget with SingleWindowInterface {
   final String path;
@@ -13,7 +12,7 @@ class Article extends StatelessWidget with SingleWindowInterface {
   Widget build(BuildContext context) => contents[path]!;
 
   @override
-  bool inheritScrollingFeature() => true;
+  bool scrollable() => true;
 }
 
 class Content1 extends StatelessWidget {

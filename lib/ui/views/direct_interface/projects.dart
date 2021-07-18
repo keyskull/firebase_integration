@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../windows_layer.dart';
+import 'package:framework/windows/window_layer.dart';
 
 class Projects extends StatelessWidget with SingleWindowInterface {
   @override
@@ -10,8 +9,8 @@ class Projects extends StatelessWidget with SingleWindowInterface {
   }
 
   @override
-  bool inheritScrollingFeature() {
-    // TODO: implement inheritScrollingFeature
+  bool scrollable() {
+    // TODO: implement scrollable
     throw UnimplementedError();
   }
 }

@@ -3,10 +3,10 @@ import 'dart:ui';
 import 'package:cullen/ui/components/bottom/footer.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:framework/windows/window_layer.dart';
 import 'package:localization/generated/l10n.dart';
 
 import '../../../components/buttons/blog_page_button.dart';
-import '../../windows_layer.dart';
 
 void main() {
   runApp(Blog());
@@ -71,7 +71,7 @@ class BlogPage extends StatefulWidget with SingleWindowInterface {
   _BlogPageState createState() => _BlogPageState();
 
   @override
-  bool inheritScrollingFeature() => true;
+  bool scrollable() => true;
 }
 
 class _BlogPageState extends State<BlogPage> with TickerProviderStateMixin {

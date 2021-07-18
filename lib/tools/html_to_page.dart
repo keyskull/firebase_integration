@@ -1,8 +1,8 @@
 import 'dart:developer';
 
-import 'package:cullen/ui/views/windows_layer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
+import 'package:framework/windows/window_layer.dart';
 import 'package:http/http.dart' as http;
 import 'package:router/pages/404.dart';
 import 'package:router/ui/views/direct_interface/loading.dart';
@@ -31,5 +31,5 @@ class HtmlToPage extends StatelessWidget with SingleWindowInterface {
       });
 
   @override
-  bool inheritScrollingFeature() => true;
+  bool scrollable() => true;
 }
