@@ -77,6 +77,7 @@ class NavigationLayerState extends State<NavigationLayer>
             child: customNavigationRail),
         // floatingActionButtonAnimator: ,
         floatingActionButton: floatingActionButtons(
+          context,
           switchNavigatorRailState: _switchNavigatorRailState,
           switchContactButtonState: _switchContactButtonState,
           hiddenNavigation: hiddenNavigation,

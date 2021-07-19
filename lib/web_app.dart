@@ -1,6 +1,7 @@
 import 'package:after_layout/after_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:framework/windows/window_layer.dart';
 import 'package:localization/generated/l10n.dart';
 import 'package:provider/provider.dart';
 import 'package:router/init_router_base.dart';
@@ -21,9 +22,12 @@ class _WebAppState extends State<WebApp> with AfterLayoutMixin {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<PathHandler>(
+    return MultiProvider(
       //using Provider, don't need to add handler to constructors of all descendants
-      create: (_) => PathHandler(),
+      providers: [
+        ChangeNotifierProvider(create: (context) => PathHandler()),
+        ChangeNotifierProvider(create: (context) => WindowContainer()),
+      ],
       child: MaterialApp.router(
         title: title,
         routerDelegate: RouterDelegateInherit(),

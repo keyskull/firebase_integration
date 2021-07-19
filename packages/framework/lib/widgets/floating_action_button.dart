@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:framework/windows/window_layer.dart';
 import 'package:pointer_interceptor/pointer_interceptor.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:utilities/drag_area.dart';
 import 'package:utilities/screen_size.dart';
 
-final floatingActionButtons = (
+final floatingActionButtons = (context,
         {required Function() switchNavigatorRailState,
         required Function() switchContactButtonState,
         required bool hiddenNavigation,
@@ -49,19 +49,15 @@ final floatingActionButtons = (
               mini: true,
               onPressed: () {
                 switchContactButtonState();
-                if (!contactButtonExtended)
-                  windowContainer.openWindow(
-                      SingleWindowInterface.buildWithSingleWindowInterface(
-                          DragArea(
-                              child: Container(
-                                  width: 100,
-                                  height: 100,
-                                  child: Scaffold(
-                                    appBar: AppBar(),
-                                    // body: HtmlElementView(
-                                    //   viewType: 'stackedit',
-                                    // ),
-                                  )))));
+                final windowContainer =
+                    Provider.of<WindowContainer>(context, listen: false);
+
+                windowContainer.openWindow(
+                    SingleWindowInterface.buildWithSingleWindowInterface(
+                        Container(
+                  child: Text(
+                      '[' + windowContainer.getWindowIdList().join(',') + ']'),
+                )));
               },
               child: contactButtonExtended
                   ? Icon(Icons.message)

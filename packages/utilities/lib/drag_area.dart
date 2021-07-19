@@ -16,8 +16,6 @@ class DragArea extends HookWidget {
       onScaleEnd: (_) => prevScale.value = scale.value,
       child: Stack(
         children: [
-          // Positioned.fill(
-          //     child: Container(color: Colors.amber.withOpacity(.4))),
           Positioned(
             left: position.value.dx,
             top: position.value.dy,

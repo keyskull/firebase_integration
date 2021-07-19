@@ -1,44 +1,38 @@
 part of 'window_layer.dart';
 
-abstract class WindowFrame extends StatefulWidget {
+abstract class WindowFrame extends StatelessWidget {
   final Widget child;
-  final SingleWindowInterface singleWindowInterface;
-  WindowFrame(this.child, this.singleWindowInterface);
+  final WindowInstance windowInstance;
 
-  Widget frameDecorationBuilder(Widget child, Widget closeButton,
-      Widget minimizeButton, Widget maximizeButton);
+  WindowFrame(this.child, this.windowInstance);
 
-  @protected
-  @override
-  State<StatefulWidget> createState() =>
-      WindowFrameState(child, frameDecorationBuilder, singleWindowInterface);
-}
-
-class WindowFrameState extends State<WindowFrame> {
-  final Widget child;
-  final SingleWindowInterface singleWindowInterface;
-
-  final Widget Function(Widget child, Widget closeButton, Widget minimizeButton,
-      Widget maximizeButton) frameDecorationBuilder;
-  final Widget closeButton = IconButton(
-      onPressed: () => windowContainer.closeWindow, icon: Icon(Icons.close));
-
-  final Widget minimizeButton =
-      IconButton(onPressed: () {}, icon: Icon(Icons.minimize));
-
-  final Widget maximizeButton =
-      IconButton(onPressed: () {}, icon: Icon(Icons.add));
-
-  WindowFrameState(
-      this.child, this.frameDecorationBuilder, this.singleWindowInterface);
+  Widget frameDecorationBuilder(BuildContext context, Widget child,
+      Widget closeButton, Widget minimizeButton, Widget maximizeButton);
 
   @override
-  Widget build(BuildContext context) => GestureDetector(
-      onTapDown: (tapDownDetail) {
-        setState(() {
-          windowContainer.activatingWindow(singleWindowInterface);
-        });
-      },
-      child: frameDecorationBuilder(
-          child, closeButton, minimizeButton, maximizeButton));
+  Widget build(BuildContext context) {
+    final windowContainer =
+        Provider.of<WindowContainer>(context, listen: false);
+
+    final Widget closeButton = ElevatedButton(
+        onPressed: () {
+          log('closing window: ${windowInstance.getId()}');
+          windowContainer.closeWindow(windowInstance._singleWindowInterface);
+        },
+        child: Icon(Icons.close));
+
+    final Widget minimizeButton =
+        ElevatedButton(onPressed: () {}, child: Icon(Icons.minimize));
+
+    final Widget maximizeButton =
+        ElevatedButton(onPressed: () {}, child: Icon(Icons.add));
+
+    return GestureDetector(
+        onTapDown: (tapDownDetail) {
+          windowContainer
+              .activatingWindow(windowInstance._singleWindowInterface);
+        },
+        child: frameDecorationBuilder(
+            context, child, closeButton, minimizeButton, maximizeButton));
+  }
 }

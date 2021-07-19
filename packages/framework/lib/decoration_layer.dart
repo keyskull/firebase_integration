@@ -49,7 +49,7 @@ class DecorationLayerState extends State<DecorationLayer>
       body: Stack(alignment: Alignment.topCenter, children: [
         _notificationListener(child is SingleWindowInterface
             ? ((child) {
-                return child.buildSingleWindowInterface();
+                return (child as SingleWindowInterface).built;
               }(child))
             : child),
         ...decorations
