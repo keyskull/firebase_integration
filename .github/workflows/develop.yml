@@ -37,15 +37,16 @@ jobs:
         with:
           targetBranch: gh-pages-develop
   deploy:
-    needs: build
+    if: always()
+    needs: Build
     runs-on: ubuntu-latest
     steps:
-      - name: Tansfer to Public Repository
-        uses: andstor/copycat-action@v3
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Files Sync Action
+        uses: adrianjost/files-sync-action@v1.0.1
         with:
-          personal_token: ${{secrets.SYNCED_GITHUB_TOKEN}}
-          src_path: /.
-          src_branch: gh-pages-develop
-          dst_path: /.
-          dst_owner: keyskull
-          dst_repo_name: cullen.ml_test
+          FILE_PATTERNS: |
+            \S
+          TARGET_REPOS: |
+            keyskull/cullen.ml_test
+          GITHUB_TOKEN: ${{secrets.SYNCED_GITHUB_TOKEN}}
