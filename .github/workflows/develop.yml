@@ -36,12 +36,12 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Write File
-          uses: DamianReeves/write-file-action@v1.0
-          with:
-            path: ${{github.workspace}}/CNAME
-            contents: |
-              dragon-ball.ml
-            write-mode: overwrite
+        uses: DamianReeves/write-file-action@v1.0
+        with:
+          path: ${{github.workspace}}/CNAME
+          contents: |
+            dragon-ball.ml
+          write-mode: overwrite
       - name: Files Sync Action
         uses: adrianjost/files-sync-action@v1.0.1
         with:
