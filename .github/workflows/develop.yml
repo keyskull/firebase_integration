@@ -29,3 +29,15 @@ jobs:
         uses: keyskull/flutter-gh-pages@v4
         with:
           targetBranch: gh-pages-develop
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+      - name: Tansfer to Public Repository
+        uses: andstor/copycat-action@v3
+        with:
+          personal_token: ${{secrets.SYNCED_GITHUB_TOKEN}}
+          src_path: /.
+          src_branch: gh-pages-develop
+          dst_path: /.
+          dst_owner: keyskull
+          dst_repo_name: cullen.ml_test
