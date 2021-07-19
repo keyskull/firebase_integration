@@ -35,7 +35,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - - name: Write File
+      - name: Write File
           uses: DamianReeves/write-file-action@v1.0
           with:
             path: ${{github.workspace}}/CNAME
