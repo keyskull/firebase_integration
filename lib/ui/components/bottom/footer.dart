@@ -63,7 +63,11 @@ class Footer extends StatelessWidget {
                                 .changePath("about-the-webpages"),
                         style: buttonStyle,
                         child: _text(S.of(context).about_the_webpages)),
-                    Container(),
+                    TextButton(
+                        onPressed: () => launch(
+                            "https://stats.uptimerobot.com/vDYQ8hWXoM/788299671"),
+                        style: buttonStyle,
+                        child: _text(S.of(context).website_status)),
                     TextButton(
                         onPressed: () =>
                             Provider.of<PathHandler>(context, listen: false)
@@ -78,7 +82,12 @@ class Footer extends StatelessWidget {
                         onPressed: () => launch("https://github.com/keyskull"),
                         style: buttonStyle,
                         child: _text(S.of(context).my_github)),
-                    Container(),
+                    TextButton(
+                        onPressed: () =>
+                            Provider.of<PathHandler>(context, listen: false)
+                                .changePath("web_browser"),
+                        style: buttonStyle,
+                        child: _text("Web Browser")),
                     Container()
                   ],
                 ),

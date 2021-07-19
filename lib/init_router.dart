@@ -1,11 +1,16 @@
+import 'package:cullen/ui/components/bottom/bar/cookiebar.dart';
 import 'package:firebase_integration/ui/views/login.dart' deferred as login;
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:framework/decoration_layer.dart';
+import 'package:framework/framework.dart';
+import 'package:framework/navigation_layer.dart';
+import 'package:framework/windows/window_layer.dart';
 import 'package:localization/generated/l10n.dart';
 import 'package:router/route.dart';
 import 'package:web_browser/web_browser.dart' deferred as web_browser;
 
 import 'tools/html_to_page.dart' deferred as htmlToPage;
-import 'ui/views/decoration_layer.dart';
 import 'ui/views/direct_interface/about_me.dart' deferred as aboutMe;
 import 'ui/views/direct_interface/blog/article_page.dart' deferred as article;
 import 'ui/views/direct_interface/blog/blog_page.dart' deferred as blog;
@@ -23,24 +28,33 @@ class InitRouter {
           .then((_) => article.Article(path: parameters ?? '')));
 
   InitRouter(BuildContext context) {
-    decorationLayer = ({required Widget child, AppBar? appBar}) =>
-        DecorationLayer(child: child, appBar: appBar);
+    windowsLayer = ({required Widget child}) => WindowLayer(
+          child: child,
+        );
+    navigationLayer =
+        ({required Widget child}) => NavigationLayer(child: child);
+    decorationLayer =
+        ({required Widget child, AppBar? appBar}) => DecorationLayer(
+              child: child,
+              appBarBuilder: appBarBuilder,
+              decorations: [CookieBar()],
+            );
 
     RouteInstance(
         routePath: "",
-        title: 'NumFlurry Nonprofit Organization',
+        title: S.of(context).home_page_name,
         pageBuilder: (_, __) =>
             home.loadLibrary().then((value) => home.Home()));
     RouteInstance(
         routePath: "home",
-        title: 'NumFlurry Nonprofit Organization',
+        title: S.of(context).home_page_name,
         pageBuilder: (_, __) =>
             home.loadLibrary().then((value) => home.Home()));
     RouteInstance(routePath: "blog", title: 'Blog', pageBuilder: blogBuilder);
 
     RouteInstance(
         routePath: "about-me",
-        title: 'About Me',
+        title: S.of(context).about_me,
         pageBuilder: (_, __) =>
             aboutMe.loadLibrary().then((value) => aboutMe.AboutMe()));
 
@@ -55,14 +69,13 @@ class InitRouter {
         title: 'Disclaimer',
         pageBuilder: (_, __) => htmlToPage
             .loadLibrary()
-            .then((value) => htmlToPage.htmlToPage('disclaimer.html')));
+            .then((value) => htmlToPage.HtmlToPage(path: 'disclaimer.html')));
 
     RouteInstance(
         routePath: "cookie-policy",
         title: 'Cookie Policy',
-        pageBuilder: (_, __) => htmlToPage
-            .loadLibrary()
-            .then((value) => htmlToPage.htmlToPage('cookie-policy.html')));
+        pageBuilder: (_, __) => htmlToPage.loadLibrary().then(
+            (value) => htmlToPage.HtmlToPage(path: 'cookie-policy.html')));
 
     // RouteInstance(
     //     routePath: "test",
@@ -77,6 +90,13 @@ class InitRouter {
     //             ..style.border = 'none');
     //       return HtmlElementView(viewType: 'hello-world-html');
     //     });
+
+    RouteInstance(
+        routePath: "markdown",
+        title: 'Narkdown',
+        pageBuilder: (_, __) async =>
+            Markdown(data: "dadasdasdadsssssssssssssssss"));
+
     RouteInstance(
         routePath: "dashboard",
         title: 'Dashboard',
@@ -106,7 +126,7 @@ class InitRouter {
                         gestureNavigationEnabled: true,
                         initialMediaPlaybackPolicy:
                             web_browser.AutoMediaPlaybackPolicy.always_allow),
-                initialUrl: 'https://www.cullen.ml/Toschedule',
+                initialUrl: 'https://baidu.com',
                 javascriptEnabled: true)));
 
     RouteInstance(

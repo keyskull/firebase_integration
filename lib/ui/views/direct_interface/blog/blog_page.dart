@@ -3,7 +3,8 @@ import 'dart:ui';
 import 'package:cullen/ui/components/bottom/footer.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:utilities/widgets/scroll_view/universal_single_child_scroll_view.dart';
+import 'package:framework/windows/window_layer.dart';
+import 'package:localization/generated/l10n.dart';
 
 import '../../../components/buttons/blog_page_button.dart';
 
@@ -38,8 +39,8 @@ class BlogHeader extends StatelessWidget {
             children: [
               Flexible(
                 flex: 3,
-                child: const Text(
-                  "Welcome to Numflurry",
+                child: Text(
+                  S.of(context).blog,
                   style: TextStyle(
                     fontSize: 70,
                   ),
@@ -47,28 +48,10 @@ class BlogHeader extends StatelessWidget {
               ),
               Flexible(
                 flex: 2,
-                child: const Text(
-                  "   Welcome to NumFlurry Nonprofit Organization's website.",
+                child: Text(
+                  S.of(context).blog_description,
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
                   //maxLines: 2,
-                ),
-              ),
-              Flexible(
-                flex: 2,
-                child: Container(
-                  margin: const EdgeInsets.all(20),
-                  height: 40,
-                  width: 126,
-                  child: OutlineButton(
-                    borderSide: const BorderSide(width: 1.0),
-                    onPressed: () {
-                      // Respond to button press
-                    },
-                    child: const Text(
-                      "Get Started",
-                      style: const TextStyle(color: Colors.black),
-                    ),
-                  ),
                 ),
               ),
             ],
@@ -79,30 +62,27 @@ class BlogHeader extends StatelessWidget {
 
 double position = 0;
 
-class BlogPage extends StatefulWidget {
+class BlogPage extends StatefulWidget with SingleWindowInterface {
   final ValueChanged<String>? handler;
 
   BlogPage({this.handler});
 
   @override
   _BlogPageState createState() => _BlogPageState();
+
+  @override
+  bool scrollable() => true;
 }
 
 class _BlogPageState extends State<BlogPage> with TickerProviderStateMixin {
-  @override
-  void initState() {
-    super.initState();
-  }
-
   late double top;
 
   //double position = 0;
 
   @override
   Widget build(BuildContext context) {
-    return UniversalSingleChildScrollView(
-        child: Column(
-      children: [BlogTopicChips(), Footer()],
-    ));
+    return Column(
+      children: [BlogHeader(), BlogTopicChips(), Footer()],
+    );
   }
 }

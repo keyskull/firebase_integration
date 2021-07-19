@@ -1,6 +1,7 @@
 import 'package:after_layout/after_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:framework/windows/window_layer.dart';
 import 'package:localization/generated/l10n.dart';
 import 'package:provider/provider.dart';
 import 'package:router/init_router_base.dart';
@@ -10,7 +11,6 @@ import 'package:router/router_delegate.dart';
 import 'package:utilities/screen_size.dart';
 
 import 'init_router.dart';
-import 'ui/views/navigation_layer.dart';
 
 class WebApp extends StatefulWidget {
   @override
@@ -22,9 +22,12 @@ class _WebAppState extends State<WebApp> with AfterLayoutMixin {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<PathHandler>(
+    return MultiProvider(
       //using Provider, don't need to add handler to constructors of all descendants
-      create: (_) => PathHandler(),
+      providers: [
+        ChangeNotifierProvider(create: (context) => PathHandler()),
+        ChangeNotifierProvider(create: (context) => WindowContainer()),
+      ],
       child: MaterialApp.router(
         title: title,
         routerDelegate: RouterDelegateInherit(),
@@ -32,9 +35,8 @@ class _WebAppState extends State<WebApp> with AfterLayoutMixin {
         builder: (context, Widget? child) {
           ScreenSize.initScreenSize(context);
           InitRouter(context);
-          return NavigationLayer(
-              child: child ??
-                  (InitRouterBase.unknownPage.getPage() as MaterialPage).child);
+          return child ??
+              (InitRouterBase.unknownPage.getPage() as MaterialPage).child;
         },
         localizationsDelegates: [
           S.delegate,

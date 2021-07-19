@@ -21,23 +21,31 @@ version: 1.0.0+6
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
-  flutter: ">=2.1.0"
+  flutter: ">=2.2.2"
 
 
 dependencies:
   router:
-    path: ./router
+    path: ./packages/router
 
   firebase_integration:
-    path: ./firebase_integration
+    path: ./packages/firebase_integration
 
 
   localization:
-    path: ./localization
+    path: ./packages/localization
 
+  universal_scroll_view:
+    path: ./packages/universal_scroll_view
 
   utilities:
-    path: ./utilities
+    path: ./packages/utilities
+
+  framework:
+    path: ./packages/framework
+
+  shared_preferences: ^2.0.6
+
 
   unofficial_notionapi:
     git:
@@ -82,6 +90,8 @@ dependencies:
 
   auto_size_text: ^3.0.0-nullsafety.0
 
+  flutter_markdown: ^0.6.2
+  pointer_interceptor: ^0.9.0+1
 
 
   # The following adds the Cupertino Icons font to your application.
