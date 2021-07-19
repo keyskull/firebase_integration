@@ -39,6 +39,7 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    steps:
       - name: Tansfer to Public Repository
         uses: andstor/copycat-action@v3
         with:
