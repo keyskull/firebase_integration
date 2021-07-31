@@ -1,4 +1,3 @@
-
 part of '../navigation_layer.dart';
 
 /// This is the stateful widget that the main application instantiates.
@@ -148,20 +147,8 @@ class CustomNavigationRailState extends State<CustomNavigationRail>
                                 extended: _extend,
                                 selectedIndex: _selectedIndex,
                                 onDestinationSelected: (int index) {
-                                  if (_selectedIndex != index) {
-                                    setState(() {
-                                      _selectedIndex = index;
-                                    });
-
-                                    Provider.of<PathHandler>(context,
-                                            listen: false)
-                                        .changePath(buttonPaths[index]);
-                                  } else if ((((globalNavigatorKey
-                                                  .currentState!
-                                                  .widget
-                                                  .pages
-                                                  .first
-                                                  .key as ValueKey)
+                                  if ((((globalNavigatorKey.currentState!.widget
+                                                  .pages.first.key as ValueKey)
                                               .value) as RouteData)
                                           .path
                                           .substring(1) !=
