@@ -13,10 +13,8 @@ part 'window_frame.dart';
 
 WindowContainer windowContainer = WindowContainer();
 
-/// [WindowLayer] is the top layer which is use for managing the widget
+/// [WindowLayer] is the top layer which is use for managing the widget which
 /// implemented [SingleWindowInterface] mixin class.
-///
-/// When the windows queue update the state also need to update.
 class WindowLayer extends StatelessWidget {
   final Widget child;
 
@@ -29,16 +27,10 @@ class WindowLayer extends StatelessWidget {
       children: [child, InstanceView()],
     );
   }
-
-// @override
-// void initState() {
-//   WidgetsBinding.instance!.endOfFrame.then(
-//     (_) => setState(() {}),
-//   );
-//   super.initState();
-// }
 }
 
+///
+/// When the windows queue update the state also need to update.
 class InstanceView extends StatefulWidget {
   InstanceView({Key? key}) : super(key: key);
 
@@ -47,22 +39,27 @@ class InstanceView extends StatefulWidget {
 }
 
 class _InstanceViewState extends State<InstanceView> {
-  List<String> widgetIds = [];
   List<Widget> instances = [];
-
-  updateIds(List<String> ids) {
+  updateInstances() {
     setState(() {
-      widgetIds = ids;
-      instances = widgetIds.map((id) {
-        log("generating instance: " + id.toString(), name: "window_layer");
-        return new Instance(id: id);
+      instances = windowContainer.instanceBuilders.map((e) {
+        log("generating instance: " + e.id.toString(), name: "window_layer");
+        return Positioned(
+            left: e.position.dx,
+            top: e.position.dy,
+            child: e.windowBuilder(e.id).buildSingleWindowInterface());
       }).toList();
     });
   }
 
   @override
   void initState() {
-    widgetIds = windowContainer.ids;
+    instances = windowContainer.instanceBuilders
+        .map((e) => Positioned(
+            left: e.position.dx,
+            top: e.position.dy,
+            child: e.windowBuilder(e.id).buildSingleWindowInterface()))
+        .toList();
     windowContainer.currentState = this;
     super.initState();
   }
@@ -75,7 +72,7 @@ class _InstanceViewState extends State<InstanceView> {
             MaterialButton(
               onPressed: () {
                 setState(() {
-                  widgetIds.add(windowContainer.instanceBuilders.last.id);
+                  instances.add(instances.last);
                 });
               },
               child: Text("dasdsada"),
@@ -87,21 +84,21 @@ class _InstanceViewState extends State<InstanceView> {
 }
 
 class Instance extends StatelessWidget {
-  final String id;
+  final int id;
 
   const Instance({Key? key, required this.id}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return windowContainer.instanceBuilders
-        .firstWhere((element) => element.id == id)
-        .windowBuilder(id);
+    return windowContainer.instanceBuilders[id]
+        .windowBuilder(windowContainer.instanceBuilders[id].id)
+        .buildSingleWindowInterface();
   }
 }
 
 class InstanceBuilder {
   late String id;
-
+  Offset position = Offset(100, 100);
   SingleWindowInterface Function(String id) windowBuilder;
 
   InstanceBuilder(this.windowBuilder);
@@ -113,19 +110,17 @@ class InstanceBuilder {
 class WindowContainer {
   List<InstanceBuilder> instanceBuilders = [];
 
-  List<String> ids = [];
-
   _InstanceViewState? currentState;
 
-  bool isActive(WindowFrame windowFrame) => ids.last == windowFrame.id;
+  bool isActive(WindowFrame windowFrame) =>
+      instanceBuilders.last.id == windowFrame.id;
 
   List<String> getWindowIdList() => instanceBuilders.map((e) => e.id).toList();
 
   closeWindow(String id) {
-    log("Removed window: " + id, name: "window_layer");
-    instanceBuilders.removeWhere((element) => element.id == id);
-    ids.remove(id);
-    currentState?.updateIds(ids);
+    log("Removing window: " + id.toString(), name: "window_layer");
+    instanceBuilders.removeWhere((e) => e.id == id);
+    currentState?.updateInstances();
   }
 
   openWindow(InstanceBuilder instanceBuilder) {
@@ -134,8 +129,7 @@ class WindowContainer {
     log("Opened window: " + id, name: "window_layer");
 
     instanceBuilders.add(instanceBuilder);
-    ids.add(id);
-    currentState?.updateIds(ids);
+    currentState?.updateInstances();
     log("List of windows: [" + getWindowIdList().join(',') + ']',
         name: "window_layer");
     log("Length of windows: [" + getWindowIdList().length.toString() + ']',
@@ -149,16 +143,24 @@ class WindowContainer {
     log("List of windows: [" + getWindowIdList().join(',') + ']',
         name: "window_layer");
 
-    final index = ids.indexOf(id);
+    final index = instanceBuilders.indexWhere((e) => e.id == id);
+    log("updated index: $index", name: "WindowLayerState");
 
-    if (index != -1 && index < ids.length && index != ids.length - 1) {
-      log("updated index: $index", name: "WindowLayerState");
-      final instance = ids[index];
-      ids[index] = ids[ids.length - 1];
-      ids[ids.length - 1] = instance;
+    if (index != -1 &&
+        index < instanceBuilders.length &&
+        index != instanceBuilders.length - 1) {
+      final _ib = instanceBuilders[index];
+      instanceBuilders[index] = instanceBuilders.last;
+      instanceBuilders[instanceBuilders.length - 1] = _ib;
+      currentState?.updateInstances();
     }
-    currentState?.updateIds(ids);
 
     // if (_windowMode is WindowFrame) (_windowMode as WindowFrame);
+  }
+
+  updatePosition(String id, Offset offset) {
+    final builder = instanceBuilders.firstWhere((element) => element.id == id);
+    builder.position = offset;
+    currentState?.updateInstances();
   }
 }

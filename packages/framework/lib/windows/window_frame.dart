@@ -4,16 +4,16 @@ final boxConstraints = BoxConstraints(
     minHeight: 200,
     minWidth: 200,
     maxWidth: ScreenSize.getScreenSize.width * 0.8,
-    maxHeight: ScreenSize.getScreenSize.height);
+    maxHeight: ScreenSize.getScreenSize.height * 0.8);
 final boxDecoration =
     BoxDecoration(color: Colors.white, border: Border.all(width: 2));
 
-abstract class WindowFrame extends StatefulWidget {
+abstract class WindowFrame extends StatelessWidget {
   final Widget child;
   final String id;
-  final Offset position;
+  final Offset? position;
 
-  WindowFrame(this.child, this.id, {this.position = const Offset(100, 100)});
+  WindowFrame(this.child, this.id, {this.position});
 
   WindowWidget frameDecorationBuilder(
       BuildContext context,
@@ -24,27 +24,8 @@ abstract class WindowFrame extends StatefulWidget {
       Widget maximizeButton);
 
   @override
-  State<StatefulWidget> createState() =>
-      WindowFrameState(child, id, position, frameDecorationBuilder);
-}
-
-class WindowFrameState extends State<WindowFrame> {
-  final Widget child;
-  final String id;
-  final WindowWidget Function(
-      BuildContext context,
-      Widget child,
-      String id,
-      Widget closeButton,
-      Widget minimizeButton,
-      Widget maximizeButton) frameDecorationBuilder;
-  Offset position;
-
-  WindowFrameState(
-      this.child, this.id, this.position, this.frameDecorationBuilder);
-
-  @override
   Widget build(BuildContext context) {
+    if (position != null) windowContainer.updatePosition(id, position!);
     final Widget closeButton = ElevatedButton(
         onPressed: () {
           log('closing window: $id}');
@@ -63,25 +44,16 @@ class WindowFrameState extends State<WindowFrame> {
     final builtTitle = Container(
         constraints: BoxConstraints(maxHeight: 30, minWidth: 200),
         child: frameDecoration.windowBar);
-    final builtContent =
-        Container(constraints: boxConstraints, child: frameDecoration.content);
+    final builtContent = Padding(
+        padding: EdgeInsets.only(top: 20),
+        child: Container(
+            constraints: boxConstraints, child: frameDecoration.content));
 
     final dragWidget = Draggable(
       maxSimultaneousDrags: 1,
-      feedback: Container(
-          constraints: boxConstraints,
-          decoration: boxDecoration,
-          child: Scaffold(
-              primary: false,
-              body: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [builtTitle, builtContent],
-              ))),
+      feedback: this,
       onDragEnd: (details) {
-        setState(() {
-          position = details.offset;
-        });
+        windowContainer.updatePosition(id, details.offset);
         windowContainer.activatingWindow(id);
       },
       child: builtTitle,
@@ -90,19 +62,15 @@ class WindowFrameState extends State<WindowFrame> {
         onTapDown: (tapDownDetail) {
           windowContainer.activatingWindow(id);
         },
-        child: Container(
-            constraints: boxConstraints,
-            decoration: boxDecoration,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [dragWidget, builtContent],
-            )));
-    return Positioned(
-      left: position.dx,
-      top: position.dy,
-      child: builtChild2,
-    );
+        child: DefaultTextStyle(
+            style: TextStyle(fontSize: 20, color: Colors.black),
+            child: Container(
+                constraints: boxConstraints,
+                decoration: boxDecoration,
+                child: Stack(
+                  children: [dragWidget, builtContent],
+                ))));
+    return builtChild2;
   }
 }
 

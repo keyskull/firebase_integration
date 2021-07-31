@@ -22,6 +22,7 @@ mixin SingleWindowInterface on Widget {
   late String _id = "Unknown Instance";
 
   String getId() => _id;
+
   bool scrollable();
 
   WindowFrame windowFrameBuilder(Widget child) =>
@@ -51,11 +52,16 @@ class _InstanceSingleWindowInterface extends StatelessWidget
   }
 
   @override
-  Widget build(BuildContext context) => _framework(child);
+  Widget build(BuildContext context) => Column(
+        children: [
+          Text("Content Layer"),
+          this.child,
+        ],
+      );
 
   @override
-  ScreenMode setScreenMode() => ScreenMode.window;
+  ScreenMode setScreenMode() => this.screenMode;
 
   @override
-  bool scrollable() => isScrollable;
+  bool scrollable() => this.isScrollable;
 }

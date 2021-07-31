@@ -21,12 +21,9 @@ class _WebAppState extends State<WebApp> with AfterLayoutMixin {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
+    return ChangeNotifierProvider(
       //using Provider, don't need to add handler to constructors of all descendants
-      providers: [
-        ChangeNotifierProvider(create: (context) => PathHandler()),
-        // ChangeNotifierProvider(create: (context) => WindowContainer()),
-      ],
+      create: (context) => PathHandler(),
       child: MaterialApp.router(
         title: title,
         routerDelegate: RouterDelegateInherit(),
