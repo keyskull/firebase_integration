@@ -3,7 +3,7 @@ import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:framework/windows/window_layer.dart';
 
-class Article extends StatelessWidget with SingleWindowInterface {
+class Article extends StatelessWidget with SingleWindowInterfaceMixin {
   final String path;
 
   Article({required this.path});

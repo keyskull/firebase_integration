@@ -14,7 +14,7 @@ part 'window_frame.dart';
 WindowContainer windowContainer = WindowContainer();
 
 /// [WindowLayer] is the top layer which is use for managing the widget which
-/// implemented [SingleWindowInterface] mixin class.
+/// implemented [SingleWindowInterfaceMixin] mixin class.
 class WindowLayer extends StatelessWidget {
   final Widget child;
 
@@ -99,7 +99,7 @@ class Instance extends StatelessWidget {
 class InstanceBuilder {
   late String id;
   Offset position = Offset(100, 100);
-  SingleWindowInterface Function(String id) windowBuilder;
+  SingleWindowInterfaceMixin Function(String id) windowBuilder;
 
   InstanceBuilder(this.windowBuilder);
 }

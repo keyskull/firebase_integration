@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:framework/windows/window_layer.dart';
 
-class Projects extends StatelessWidget with SingleWindowInterface {
+class Projects extends StatelessWidget with SingleWindowInterfaceMixin {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build

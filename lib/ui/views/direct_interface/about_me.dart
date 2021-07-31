@@ -4,7 +4,7 @@ import 'package:localization/generated/l10n.dart';
 import 'package:provider/provider.dart';
 import 'package:router/path_handler.dart';
 
-class AboutMe extends StatelessWidget with SingleWindowInterface {
+class AboutMe extends StatelessWidget with SingleWindowInterfaceMixin {
   final textButtonStyle = TextButton.styleFrom(
       padding: const EdgeInsets.all(10), enableFeedback: false);
 

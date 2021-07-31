@@ -62,7 +62,7 @@ class BlogHeader extends StatelessWidget {
 
 double position = 0;
 
-class BlogPage extends StatefulWidget with SingleWindowInterface {
+class BlogPage extends StatefulWidget with SingleWindowInterfaceMixin {
   final ValueChanged<String>? handler;
 
   BlogPage({this.handler});

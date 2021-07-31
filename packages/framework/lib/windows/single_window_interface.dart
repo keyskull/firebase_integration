@@ -2,7 +2,7 @@ part of 'window_layer.dart';
 
 enum ScreenMode { window, fullScreen, onlyFullScreen }
 
-mixin SingleWindowInterface on Widget {
+mixin SingleWindowInterfaceMixin on Widget {
   late final Widget Function(Widget child) _scrollview = scrollable()
       ? (child) => UniversalSingleChildScrollView(child: child)
       : (child) => child;
@@ -32,7 +32,7 @@ mixin SingleWindowInterface on Widget {
 
   Widget buildSingleWindowInterface() => _framework(this);
 
-  static SingleWindowInterface buildWithSingleWindowInterface(
+  static SingleWindowInterfaceMixin buildWithSingleWindowInterface(
           String id, Widget child,
           {bool isScrollable = false,
           ScreenMode screenMode = ScreenMode.window}) =>
@@ -40,7 +40,7 @@ mixin SingleWindowInterface on Widget {
 }
 
 class _InstanceSingleWindowInterface extends StatelessWidget
-    with SingleWindowInterface {
+    with SingleWindowInterfaceMixin {
   final Widget child;
   final String id;
   final ScreenMode screenMode;

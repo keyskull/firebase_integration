@@ -50,7 +50,7 @@ final floatingActionButtons = (context,
                 switchContactButtonState();
 
                 windowContainer.openWindow(InstanceBuilder((id) =>
-                    SingleWindowInterface.buildWithSingleWindowInterface(
+                    SingleWindowInterfaceMixin.buildWithSingleWindowInterface(
                       id,
                       Text('[' +
                           windowContainer.getWindowIdList().join(',') +

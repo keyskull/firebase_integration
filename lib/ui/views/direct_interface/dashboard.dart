@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:framework/windows/window_layer.dart';
 
-class Dashboard extends StatelessWidget with SingleWindowInterface {
+class Dashboard extends StatelessWidget with SingleWindowInterfaceMixin {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
