@@ -5,7 +5,6 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:framework/decoration_layer.dart';
 import 'package:framework/framework.dart';
 import 'package:framework/navigation_layer.dart';
-import 'package:framework/windows/window_layer.dart';
 import 'package:localization/generated/l10n.dart';
 import 'package:router/route.dart';
 import 'package:web_browser/web_browser.dart' deferred as web_browser;
@@ -28,13 +27,11 @@ class InitRouter {
           .then((_) => article.Article(path: parameters ?? '')));
 
   InitRouter(BuildContext context) {
-    windowsLayer = ({required Widget child}) => WindowLayer(
-          child: child,
-        );
-    navigationLayer =
-        ({required Widget child}) => NavigationLayer(child: child);
+    navigationLayer = ({Key? key, required Widget child}) =>
+        NavigationLayer(key: key, child: child);
     decorationLayer =
-        ({required Widget child, AppBar? appBar}) => DecorationLayer(
+        ({Key? key, required Widget child, AppBar? appBar}) => DecorationLayer(
+              key: key,
               child: child,
               appBarBuilder: appBarBuilder,
               decorations: [CookieBar()],
