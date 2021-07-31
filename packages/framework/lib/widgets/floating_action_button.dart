@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:framework/windows/window_layer.dart';
 import 'package:pointer_interceptor/pointer_interceptor.dart';
-import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:utilities/screen_size.dart';
 
@@ -49,15 +48,14 @@ final floatingActionButtons = (context,
               mini: true,
               onPressed: () {
                 switchContactButtonState();
-                final windowContainer =
-                    Provider.of<WindowContainer>(context, listen: false);
 
-                windowContainer.openWindow(
+                windowContainer.openWindow(InstanceBuilder((id) =>
                     SingleWindowInterface.buildWithSingleWindowInterface(
-                        Container(
-                  child: Text(
-                      '[' + windowContainer.getWindowIdList().join(',') + ']'),
-                )));
+                      id,
+                      Text('[' +
+                          windowContainer.getWindowIdList().join(',') +
+                          ']'),
+                    )));
               },
               child: contactButtonExtended
                   ? Icon(Icons.message)

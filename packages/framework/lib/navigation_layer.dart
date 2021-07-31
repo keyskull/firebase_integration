@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:framework/windows/window_layer.dart';
 import 'package:localization/generated/l10n.dart';
 import 'package:pointer_interceptor/pointer_interceptor.dart';
 import 'package:provider/provider.dart';
@@ -18,7 +19,7 @@ class NavigationLayer extends StatefulWidget {
   final Widget child;
   final GlobalKey<CustomNavigationRailState> navigationRailKey = GlobalKey();
 
-  NavigationLayer({required this.child});
+  NavigationLayer({Key? key, required this.child}) : super(key: key);
 
   @override
   NavigationLayerState createState() =>
@@ -71,10 +72,11 @@ class NavigationLayerState extends State<NavigationLayer>
     return Scaffold(
         // key: scaffoldKey,
         backgroundColor: Colors.black87,
-        body: RawMaterialButton(
-            mouseCursor: SystemMouseCursors.basic,
-            onPressed: () => navigationRailKey.currentState?..closeRail(),
-            child: customNavigationRail),
+        body: WindowLayer(
+            child: RawMaterialButton(
+                mouseCursor: SystemMouseCursors.basic,
+                onPressed: () => navigationRailKey.currentState?..closeRail(),
+                child: customNavigationRail)),
         // floatingActionButtonAnimator: ,
         floatingActionButton: floatingActionButtons(
           context,

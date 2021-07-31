@@ -2,17 +2,7 @@ part of 'window_layer.dart';
 
 enum ScreenMode { window, fullScreen, onlyFullScreen }
 
-class WindowInstance {
-  final SingleWindowInterface _singleWindowInterface;
-  late String id = "Unknown Instance";
-  WindowInstance(this._singleWindowInterface);
-
-  String getId() => id;
-}
-
 mixin SingleWindowInterface on Widget {
-  late final WindowInstance windowInstance = new WindowInstance(this);
-
   late final Widget Function(Widget child) _scrollview = scrollable()
       ? (child) => UniversalSingleChildScrollView(child: child)
       : (child) => child;
@@ -28,35 +18,40 @@ mixin SingleWindowInterface on Widget {
         return _scrollview(child);
     }
   };
+
+  late String _id = "Unknown Instance";
+
+  String getId() => _id;
   bool scrollable();
 
   WindowFrame windowFrameBuilder(Widget child) =>
-      DefaultWindowFrame(child, windowInstance);
+      DefaultWindowFrame(child, getId());
 
   ScreenMode setScreenMode() => ScreenMode.onlyFullScreen;
 
   Widget buildSingleWindowInterface() => _framework(this);
 
-  late final Widget built = buildSingleWindowInterface();
-
-  static SingleWindowInterface buildWithSingleWindowInterface(Widget child,
+  static SingleWindowInterface buildWithSingleWindowInterface(
+          String id, Widget child,
           {bool isScrollable = false,
           ScreenMode screenMode = ScreenMode.window}) =>
-      new _InstanceSingleWindowInterface(child);
+      new _InstanceSingleWindowInterface(id, child);
 }
 
 class _InstanceSingleWindowInterface extends StatelessWidget
     with SingleWindowInterface {
   final Widget child;
+  final String id;
   final ScreenMode screenMode;
   final bool isScrollable;
-  _InstanceSingleWindowInterface(this.child,
-      {this.isScrollable = false, this.screenMode = ScreenMode.window});
+
+  _InstanceSingleWindowInterface(this.id, this.child,
+      {this.isScrollable = false, this.screenMode = ScreenMode.window}) {
+    this._id = id;
+  }
 
   @override
-  Widget build(BuildContext context) {
-    return this._framework(child);
-  }
+  Widget build(BuildContext context) => _framework(child);
 
   @override
   ScreenMode setScreenMode() => ScreenMode.window;

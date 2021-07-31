@@ -5,10 +5,7 @@ import 'package:router/path_handler.dart';
 import 'package:router/route.dart';
 import 'package:router/route_data.dart';
 
-import 'decoration_layer.dart';
-import 'navigation_layer.dart';
 import 'properties/common.dart';
-import 'windows/window_layer.dart';
 
 void _func() {}
 AppBar? _defaultAppBarBuilder(double appBarHeight, BuildContext context) =>
@@ -53,15 +50,3 @@ final appBarBuilder = (double appBarHeight, BuildContext context) => AppBar(
                   .changePath("about-me"),
               text: 'About Me')
         ]);
-
-class Framework {
-  static final Widget Function({required Widget child}) windowLayer =
-      ({required Widget child}) => WindowLayer(child: child);
-
-  static final Widget Function({required Widget child}) decorationLayer = (
-          {required Widget child}) =>
-      DecorationLayer(child: child, appBarBuilder: appBarBuilder);
-
-  static final Widget Function({required Widget child}) navigationLayer =
-      ({required Widget child}) => NavigationLayer(child: child);
-}

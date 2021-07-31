@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import '../properties/common.dart';
 import '../properties/navigation_content.dart';
 import 'widgets/bottom/bar/license_information_bottom_bar.dart';
-import 'windows/window_layer.dart';
 
 class DecorationLayer extends StatefulWidget {
   final Widget child;
@@ -16,9 +15,11 @@ class DecorationLayer extends StatefulWidget {
   final List<Widget> decorations;
 
   DecorationLayer(
-      {required this.child,
+      {Key? key,
+      required this.child,
       required this.appBarBuilder,
-      this.decorations = const []});
+      this.decorations = const []})
+      : super(key: key);
 
   @override
   State<StatefulWidget> createState() =>
@@ -46,14 +47,9 @@ class DecorationLayerState extends State<DecorationLayer>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBarBuilder(_appBarHeight, context),
-      body: Stack(alignment: Alignment.topCenter, children: [
-        _notificationListener(child is SingleWindowInterface
-            ? ((child) {
-                return (child as SingleWindowInterface).built;
-              }(child))
-            : child),
-        ...decorations
-      ]),
+      body: Stack(
+          alignment: Alignment.topCenter,
+          children: [_notificationListener(child), ...decorations]),
     );
   }
 
