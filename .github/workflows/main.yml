@@ -21,13 +21,6 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
-      - name: Write File
-        uses: DamianReeves/write-file-action@v1.0
-        with:
-          path: ${{github.workspace}}/web/CNAME
-          contents: |
-            dragon-ball.ml
-          write-mode: overwrite
 
       - name: Flutter Environment
         uses: subosito/flutter-action@v1

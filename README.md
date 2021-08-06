@@ -1,4 +1,5 @@
-[![Github Actions CI](https://github.com/keyskull/cullen.ml/actions/workflows/main.yml/badge.svg)](https://github.com/keyskull/cullen.ml/actions/workflows/main.yml)
+[![Main](https://github.com/keyskull/cullen.ml/actions/workflows/main.yml/badge.svg)](https://github.com/keyskull/cullen.ml/actions/workflows/main.yml)
+[![Develop](https://github.com/keyskull/cullen.ml/actions/workflows/develop.yml/badge.svg)](https://github.com/keyskull/cullen.ml/actions/workflows/develop.yml)
 
 
 # test_app
