@@ -52,12 +52,7 @@ class _InstanceSingleWindowInterface extends StatelessWidget
   }
 
   @override
-  Widget build(BuildContext context) => Column(
-        children: [
-          Text("Content Layer"),
-          this.child,
-        ],
-      );
+  Widget build(BuildContext context) => this.child;
 
   @override
   ScreenMode setScreenMode() => this.screenMode;

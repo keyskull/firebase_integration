@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../windows/window_layer.dart';
+import 'window_layer.dart';
 
 class DefaultWindowFrame extends WindowFrame {
   DefaultWindowFrame(Widget child, String id) : super(child, id);

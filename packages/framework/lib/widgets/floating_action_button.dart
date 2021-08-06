@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:framework/windows/window_layer.dart';
+import 'package:markdown_editor/markdown_editor.dart';
 import 'package:pointer_interceptor/pointer_interceptor.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:utilities/screen_size.dart';
@@ -52,9 +53,7 @@ final floatingActionButtons = (context,
                 windowContainer.openWindow(InstanceBuilder((id) =>
                     SingleWindowInterfaceMixin.buildWithSingleWindowInterface(
                       id,
-                      Text('[' +
-                          windowContainer.getWindowIdList().join(',') +
-                          ']'),
+                      MarkdownEditor(),
                     )));
               },
               child: contactButtonExtended

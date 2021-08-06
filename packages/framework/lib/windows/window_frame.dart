@@ -6,7 +6,7 @@ final boxConstraints = BoxConstraints(
     maxWidth: ScreenSize.getScreenSize.width * 0.8,
     maxHeight: ScreenSize.getScreenSize.height * 0.8);
 final boxDecoration =
-    BoxDecoration(color: Colors.white, border: Border.all(width: 2));
+BoxDecoration(color: Colors.white, border: Border.all(width: 2));
 
 abstract class WindowFrame extends StatelessWidget {
   final Widget child;
@@ -34,43 +34,43 @@ abstract class WindowFrame extends StatelessWidget {
         child: Icon(Icons.close));
 
     final Widget minimizeButton =
-        ElevatedButton(onPressed: () {}, child: Icon(Icons.minimize));
+    ElevatedButton(onPressed: () {}, child: Icon(Icons.minimize));
 
     final Widget maximizeButton =
-        ElevatedButton(onPressed: () {}, child: Icon(Icons.add));
+    ElevatedButton(onPressed: () {}, child: Icon(Icons.add));
     final frameDecoration = frameDecorationBuilder(
         context, child, id, closeButton, minimizeButton, maximizeButton);
 
     final builtTitle = Container(
-        constraints: BoxConstraints(maxHeight: 30, minWidth: 200),
+        constraints: BoxConstraints.expand(height: 30),
         child: frameDecoration.windowBar);
     final builtContent = Padding(
-        padding: EdgeInsets.only(top: 20),
+        padding: EdgeInsets.only(top: 30),
         child: Container(
             constraints: boxConstraints, child: frameDecoration.content));
 
-    final dragWidget = Draggable(
-      maxSimultaneousDrags: 1,
-      feedback: this,
-      onDragEnd: (details) {
-        windowContainer.updatePosition(id, details.offset);
-        windowContainer.activatingWindow(id);
-      },
-      child: builtTitle,
-    );
-    final builtChild2 = GestureDetector(
-        onTapDown: (tapDownDetail) {
-          windowContainer.activatingWindow(id);
-        },
+    final builtChild = PointerInterceptor(
         child: DefaultTextStyle(
             style: TextStyle(fontSize: 20, color: Colors.black),
             child: Container(
                 constraints: boxConstraints,
                 decoration: boxDecoration,
                 child: Stack(
-                  children: [dragWidget, builtContent],
+                  children: [builtTitle, builtContent],
                 ))));
-    return builtChild2;
+
+    final dragWidget = Draggable(
+      maxSimultaneousDrags: 1,
+      feedback: builtChild,
+      onDragEnd: (details) {
+        windowContainer.updatePosition(id, details.offset);
+      },
+      childWhenDragging: Container(),
+      onDragStarted: () => windowContainer.activatingWindow(id),
+      child: builtChild,
+      rootOverlay: true,
+    );
+    return dragWidget;
   }
 }
 

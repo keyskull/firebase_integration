@@ -24,6 +24,9 @@ dependencies:
   universal_scroll_view:
     path: ../universal_scroll_view
 
+  markdown_editor:
+    path: ../markdown_editor
+
   provider: ^5.0.0
   pointer_interceptor: ^0.9.0+1
   url_launcher: ^6.0.4
