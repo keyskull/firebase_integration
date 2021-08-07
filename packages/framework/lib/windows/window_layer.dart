@@ -25,30 +25,44 @@ class WindowLayer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       fit: StackFit.expand,
-      children: [child, InstanceView()],
+      children: [child, InstanceLayer()],
     );
   }
 }
 
 ///
 /// When the windows queue update the state also need to update.
-class InstanceView extends StatefulWidget {
-  InstanceView({Key? key}) : super(key: key);
+class InstanceLayer extends StatefulWidget {
+  InstanceLayer({Key? key}) : super(key: key);
 
   @override
-  _InstanceViewState createState() => _InstanceViewState();
+  _InstanceLayerState createState() => _InstanceLayerState();
 }
 
-class _InstanceViewState extends State<InstanceView> {
+class _InstanceLayerState extends State<InstanceLayer> {
   List<Widget> instances = [];
+  Map<String, Widget> map = {};
   updateInstances() {
     setState(() {
       instances = windowContainer.instanceBuilders.map((e) {
         log("generating instance: " + e.id.toString(), name: "window_layer");
+        log(
+            "position: [" +
+                e.position.dx.toString() +
+                ',' +
+                e.position.dy.toString() +
+                "]",
+            name: "window_layer");
+
         return Positioned(
             left: e.position.dx,
             top: e.position.dy,
-            child: e.windowBuilder(e.id).buildSingleWindowInterface());
+            child: map[e.id] ??
+                () {
+                  map[e.id] =
+                      e.windowBuilder(e.id).buildSingleWindowInterface();
+                  return map[e.id]!;
+                }());
       }).toList();
     });
   }
@@ -59,7 +73,12 @@ class _InstanceViewState extends State<InstanceView> {
         .map((e) => Positioned(
             left: e.position.dx,
             top: e.position.dy,
-            child: e.windowBuilder(e.id).buildSingleWindowInterface()))
+            child: map[e.id] ??
+                () {
+                  map[e.id] =
+                      e.windowBuilder(e.id).buildSingleWindowInterface();
+                  return map[e.id]!;
+                }()))
         .toList();
     windowContainer.currentState = this;
     super.initState();
@@ -84,22 +103,9 @@ class _InstanceViewState extends State<InstanceView> {
   }
 }
 
-class Instance extends StatelessWidget {
-  final int id;
-
-  const Instance({Key? key, required this.id}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return windowContainer.instanceBuilders[id]
-        .windowBuilder(windowContainer.instanceBuilders[id].id)
-        .buildSingleWindowInterface();
-  }
-}
-
 class InstanceBuilder {
   late String id;
-  Offset position = Offset(100, 100);
+  Offset position = new Offset(100, 100);
   SingleWindowInterfaceMixin Function(String id) windowBuilder;
 
   InstanceBuilder(this.windowBuilder);
@@ -110,8 +116,9 @@ class InstanceBuilder {
 ///
 class WindowContainer {
   List<InstanceBuilder> instanceBuilders = [];
+  Map<String, SingleWindowInterfaceMixin> instances = {};
 
-  _InstanceViewState? currentState;
+  _InstanceLayerState? currentState;
 
   bool isActive(WindowFrame windowFrame) =>
       instanceBuilders.last.id == windowFrame.id;
@@ -160,6 +167,8 @@ class WindowContainer {
   }
 
   updatePosition(String id, Offset offset) {
+    log('updatePosition: $id', name: "window_layer");
+
     final builder = instanceBuilders.firstWhere((element) => element.id == id);
     builder.position = offset;
     currentState?.updateInstances();

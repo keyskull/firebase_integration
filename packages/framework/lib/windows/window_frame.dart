@@ -6,7 +6,7 @@ final boxConstraints = BoxConstraints(
     maxWidth: ScreenSize.getScreenSize.width * 0.8,
     maxHeight: ScreenSize.getScreenSize.height * 0.8);
 final boxDecoration =
-BoxDecoration(color: Colors.white, border: Border.all(width: 2));
+    BoxDecoration(color: Colors.white, border: Border.all(width: 2));
 
 abstract class WindowFrame extends StatelessWidget {
   final Widget child;
@@ -34,10 +34,10 @@ abstract class WindowFrame extends StatelessWidget {
         child: Icon(Icons.close));
 
     final Widget minimizeButton =
-    ElevatedButton(onPressed: () {}, child: Icon(Icons.minimize));
+        ElevatedButton(onPressed: () {}, child: Icon(Icons.minimize));
 
     final Widget maximizeButton =
-    ElevatedButton(onPressed: () {}, child: Icon(Icons.add));
+        ElevatedButton(onPressed: () {}, child: Icon(Icons.add));
     final frameDecoration = frameDecorationBuilder(
         context, child, id, closeButton, minimizeButton, maximizeButton);
 
@@ -49,25 +49,50 @@ abstract class WindowFrame extends StatelessWidget {
         child: Container(
             constraints: boxConstraints, child: frameDecoration.content));
 
-    final builtChild = PointerInterceptor(
+    builtChild(Stack contain) => PointerInterceptor(
         child: DefaultTextStyle(
             style: TextStyle(fontSize: 20, color: Colors.black),
             child: Container(
                 constraints: boxConstraints,
                 decoration: boxDecoration,
-                child: Stack(
-                  children: [builtTitle, builtContent],
-                ))));
+                child: contain)));
 
     final dragWidget = Draggable(
       maxSimultaneousDrags: 1,
-      feedback: builtChild,
+      feedback: builtChild(
+        Stack(children: [
+          builtTitle,
+          builtContent,
+          PointerInterceptor(
+              child: Container(
+                  constraints: boxConstraints, color: Colors.transparent))
+        ]),
+      ),
       onDragEnd: (details) {
         windowContainer.updatePosition(id, details.offset);
+        windowContainer.activatingWindow(id);
       },
       childWhenDragging: Container(),
-      onDragStarted: () => windowContainer.activatingWindow(id),
-      child: builtChild,
+      child: builtChild(windowContainer.isActive(this)
+          ? Stack(
+              children: [builtTitle, builtContent],
+            )
+          : Stack(
+              children: [
+                builtTitle,
+                builtContent,
+                PointerInterceptor(
+                    child: Container(
+                  constraints: boxConstraints,
+                  color: Colors.transparent,
+                  child: SizedBox.expand(
+                    child: MaterialButton(
+                      onPressed: () => windowContainer.activatingWindow(id),
+                    ),
+                  ),
+                ))
+              ],
+            )),
       rootOverlay: true,
     );
     return dragWidget;
