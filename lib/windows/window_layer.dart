@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:pointer_interceptor/pointer_interceptor.dart';
@@ -89,17 +88,7 @@ class _InstanceLayerState extends State<InstanceLayer> {
   Widget build(BuildContext context) {
     log("list: [" + instances.map((e) => e.hashCode).join(',') + ']');
     return Stack(
-      children: <Widget>[
-            MaterialButton(
-              onPressed: () {
-                setState(() {
-                  instances.add(instances.last);
-                });
-              },
-              child: Text("dasdsada"),
-            )
-          ] +
-          instances,
+      children: instances,
     );
   }
 }
