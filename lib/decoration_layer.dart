@@ -26,7 +26,7 @@ class DecorationLayerState extends State<DecorationLayer>
 
   @override
   void initState() {
-    decorations = decorations + [LicenseInformationBottomBar()];
+    // decorations = decorations + [LicenseInformationBottomBar()];
     super.initState();
   }
 
@@ -34,9 +34,14 @@ class DecorationLayerState extends State<DecorationLayer>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBarBuilder(_appBarHeight, context),
-      body: Stack(
-          alignment: Alignment.topCenter,
-          children: [_notificationListener(child), ...decorations]),
+      body: Stack(alignment: Alignment.topCenter, children: [
+        _notificationListener((child is SingleWindowInterfaceMixin)
+            ? ((child as SingleWindowInterfaceMixin)
+                  ..setScreenMode(ScreenMode.onlyFullScreen))
+                .buildSingleWindowInterface()
+            : child),
+        ...decorations
+      ]),
     );
   }
 

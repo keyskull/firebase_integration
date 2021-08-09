@@ -3,11 +3,13 @@ part of 'window_layer.dart';
 enum ScreenMode { window, fullScreen, onlyFullScreen }
 
 mixin SingleWindowInterfaceMixin on Widget {
-  late final Widget Function(Widget child) _scrollview = scrollable()
-      ? (child) => UniversalSingleChildScrollView(child: child)
-      : (child) => child;
-  late final Widget Function(Widget child) _framework = (Widget child) {
-    switch (setScreenMode()) {
+  ScreenMode _screenMode = ScreenMode.onlyFullScreen;
+
+  Widget _scrollview(Widget child) =>
+      scrollable() ? UniversalSingleChildScrollView(child: child) : child;
+
+  Widget _framework(Widget child) {
+    switch (_screenMode) {
       case ScreenMode.onlyFullScreen:
         return _scrollview(child);
       case ScreenMode.window:
@@ -17,7 +19,7 @@ mixin SingleWindowInterfaceMixin on Widget {
       default:
         return _scrollview(child);
     }
-  };
+  }
 
   late String _id = "Unknown Instance";
 
@@ -25,12 +27,17 @@ mixin SingleWindowInterfaceMixin on Widget {
 
   bool scrollable();
 
+  void initWindow() {}
+
   WindowFrame windowFrameBuilder(Widget child) =>
       DefaultWindowFrame(child, getId());
 
-  ScreenMode setScreenMode() => ScreenMode.onlyFullScreen;
+  void setScreenMode(ScreenMode screenMode) => _screenMode = screenMode;
 
-  Widget buildSingleWindowInterface() => _framework(this);
+  Widget buildSingleWindowInterface() {
+    initWindow();
+    return _framework(this);
+  }
 
   static SingleWindowInterfaceMixin buildWithSingleWindowInterface(
           String id, Widget child,
@@ -55,7 +62,7 @@ class _InstanceSingleWindowInterface extends StatelessWidget
   Widget build(BuildContext context) => this.child;
 
   @override
-  ScreenMode setScreenMode() => this.screenMode;
+  void initWindow() => this.setScreenMode(this.screenMode);
 
   @override
   bool scrollable() => this.isScrollable;
