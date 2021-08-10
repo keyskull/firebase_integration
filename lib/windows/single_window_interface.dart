@@ -4,7 +4,6 @@ enum ScreenMode { window, fullScreen, onlyFullScreen }
 
 mixin SingleWindowInterfaceMixin on Widget {
   ScreenMode _screenMode = ScreenMode.onlyFullScreen;
-
   Widget _scrollview(Widget child) =>
       scrollable() ? UniversalSingleChildScrollView(child: child) : child;
 
@@ -34,6 +33,7 @@ mixin SingleWindowInterfaceMixin on Widget {
 
   void setScreenMode(ScreenMode screenMode) => _screenMode = screenMode;
 
+  @protected
   Widget buildSingleWindowInterface() {
     initWindow();
     return _framework(this);
