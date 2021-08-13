@@ -1,5 +1,3 @@
-// @dart=2.9
-
 import 'package:flutter/material.dart';
 
 ///
@@ -49,16 +47,16 @@ class WriteText extends StatefulWidget {
   ///
   /// 控制器
   ///
-  final WriteTextController controller;
+  final WriteTextController? controller;
 
   const WriteText({
-    Key key,
-    @required this.data,
+    Key? key,
+    required this.data,
     this.controller,
     this.showCursor = true,
     this.cursor = _kDefaultCursor,
     this.perMillSeconds = _kDefaultMillSeconds,
-    this.textStyle,
+    required this.textStyle,
     this.autoStart = true,
   })  : assert(data != null, 'data cannot be null'),
         assert(perMillSeconds != null, 'perDuration cannot be null'),
@@ -70,19 +68,19 @@ class WriteText extends StatefulWidget {
 
 class _WriteTextState extends State<WriteText>
     with SingleTickerProviderStateMixin {
-  AnimationController _animationController;
+  late AnimationController _animationController;
 
   @override
   void initState() {
     _animationController = AnimationController(
         vsync: this,
         duration:
-        Duration(milliseconds: widget.perMillSeconds * widget.data.length));
+            Duration(milliseconds: widget.perMillSeconds * widget.data.length));
     if (widget.autoStart) {
       _animationController.forward();
     }
     if (widget.controller != null) {
-      widget.controller._setStepTextState(this);
+      widget.controller!._setStepTextState(this);
     }
     super.initState();
   }
@@ -111,9 +109,9 @@ class _WriteTextState extends State<WriteText>
   Widget build(BuildContext context) {
     return AnimatedBuilder(
       animation: _animationController,
-      builder: (BuildContext context, Widget child) {
+      builder: (BuildContext context, Widget? child) {
         int endIndex =
-        (widget.data.length * _animationController.value).floor();
+            (widget.data.length * _animationController.value).floor();
         var text = widget.data.substring(0, endIndex);
         return RichText(
           text: TextSpan(
@@ -124,8 +122,8 @@ class _WriteTextState extends State<WriteText>
                 if (widget.showCursor)
                   WidgetSpan(
                       child: StepTextCursor(
-                        cursor: widget.cursor ?? _kDefaultCursor,
-                      )),
+                    cursor: widget.cursor ?? _kDefaultCursor,
+                  )),
               ]),
         );
       },
@@ -136,7 +134,7 @@ class _WriteTextState extends State<WriteText>
 class StepTextCursor extends StatefulWidget {
   final Widget cursor;
 
-  const StepTextCursor({Key key, this.cursor}) : super(key: key);
+  const StepTextCursor({Key? key, required this.cursor}) : super(key: key);
 
   @override
   _StepTextCursorState createState() => _StepTextCursorState();
@@ -144,19 +142,19 @@ class StepTextCursor extends StatefulWidget {
 
 class _StepTextCursorState extends State<StepTextCursor>
     with SingleTickerProviderStateMixin {
-  AnimationController _controller;
+  late AnimationController _controller;
 
   @override
   void initState() {
     _controller =
-    AnimationController(vsync: this, duration: Duration(milliseconds: 300))
-      ..addStatusListener((status) {
-        if (status == AnimationStatus.completed) {
-          _controller.reverse();
-        } else if (status == AnimationStatus.dismissed) {
-          _controller.forward();
-        }
-      });
+        AnimationController(vsync: this, duration: Duration(milliseconds: 300))
+          ..addStatusListener((status) {
+            if (status == AnimationStatus.completed) {
+              _controller.reverse();
+            } else if (status == AnimationStatus.dismissed) {
+              _controller.forward();
+            }
+          });
     _controller.forward();
     super.initState();
   }
@@ -171,7 +169,7 @@ class _StepTextCursorState extends State<StepTextCursor>
   Widget build(BuildContext context) {
     return AnimatedBuilder(
         animation: _controller,
-        builder: (BuildContext context, Widget child) {
+        builder: (BuildContext context, Widget? child) {
           return Opacity(
             opacity: _controller.value,
             child: widget.cursor,
@@ -194,7 +192,7 @@ class _DefaultCursor extends StatelessWidget {
 }
 
 class WriteTextController {
-  _WriteTextState _stepTextState;
+  late _WriteTextState _stepTextState;
 
   void _setStepTextState(_WriteTextState __stepTextState) {
     this._stepTextState = __stepTextState;
