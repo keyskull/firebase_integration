@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:after_layout/after_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_universal_router/route.dart';
@@ -10,7 +9,6 @@ import 'package:utilities/screen_size.dart';
 
 import '/widgets/custom_navigation_rail.dart';
 import '/windows/window_layer.dart';
-import 'widgets/bottom/bar/license_information_bottom_bar.dart';
 import 'widgets/floating_action_button.dart';
 
 part 'decoration_layer.dart';

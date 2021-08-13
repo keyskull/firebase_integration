@@ -16,7 +16,7 @@ class DecorationLayer extends StatefulWidget {
 }
 
 class DecorationLayerState extends State<DecorationLayer>
-    with TickerProviderStateMixin, AfterLayoutMixin {
+    with TickerProviderStateMixin {
   final Widget child;
   List<Widget> decorations;
 
@@ -27,6 +27,9 @@ class DecorationLayerState extends State<DecorationLayer>
   @override
   void initState() {
     // decorations = decorations + [LicenseInformationBottomBar()];
+    WidgetsBinding.instance!.endOfFrame.then(
+      (_) => afterFirstLayout(context),
+    );
     super.initState();
   }
 
@@ -89,7 +92,6 @@ class DecorationLayerState extends State<DecorationLayer>
         name: "globalNotificationListeners");
   }
 
-  @override
   void afterFirstLayout(BuildContext context) {
     _registerNotificationListener();
   }
