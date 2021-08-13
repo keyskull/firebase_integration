@@ -1,12 +1,11 @@
 import 'package:cullen/ui/components/bottom/bar/cookiebar.dart';
-import 'package:firebase_integration/ui/views/login.dart' deferred as login;
 import 'package:flutter/material.dart';
+import 'package:flutter_display_layer_framework/framework.dart';
+import 'package:flutter_firebase_integration/ui/views/login.dart'
+    deferred as login;
 import 'package:flutter_markdown/flutter_markdown.dart';
-import 'package:framework/decoration_layer.dart';
-import 'package:framework/framework.dart';
-import 'package:framework/navigation_layer.dart';
+import 'package:flutter_universal_router/route.dart';
 import 'package:localization/generated/l10n.dart';
-import 'package:router/route.dart';
 import 'package:web_browser/web_browser.dart' deferred as web_browser;
 
 import 'tools/html_to_page.dart' deferred as htmlToPage;
@@ -27,15 +26,14 @@ class InitRouter {
           .then((_) => article.Article(path: parameters ?? '')));
 
   InitRouter(BuildContext context) {
-    navigationLayer = ({Key? key, required Widget child}) =>
-        NavigationLayer(key: key, child: child);
-    decorationLayer =
+    setNavigationLayer(({Key? key, required Widget child}) =>
+        NavigationLayer(key: key, child: child));
+    setDecorationLayer(
         ({Key? key, required Widget child, AppBar? appBar}) => DecorationLayer(
               key: key,
               child: child,
-              appBarBuilder: appBarBuilder,
               decorations: [CookieBar()],
-            );
+            ));
 
     RouteInstance(
         routePath: "",

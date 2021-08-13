@@ -1,9 +1,9 @@
 import 'dart:developer';
 
 import 'package:after_layout/after_layout.dart';
-import 'package:firebase_integration/ui/components/login_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:router/route.dart';
+import 'package:flutter_firebase_integration/ui/components/login_dialog.dart';
+import 'package:flutter_universal_router/route.dart';
 import 'package:utilities/screen_size.dart';
 
 import '../../../properties/common.dart';

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:framework/windows/window_layer.dart';
+import 'package:flutter_display_layer_framework/windows/window_layer.dart';
+import 'package:flutter_universal_router/route.dart';
 import 'package:localization/generated/l10n.dart';
 import 'package:provider/provider.dart';
-import 'package:router/path_handler.dart';
 
 class AboutMe extends StatelessWidget with SingleWindowInterfaceMixin {
   final textButtonStyle = TextButton.styleFrom(

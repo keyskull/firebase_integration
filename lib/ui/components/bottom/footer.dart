@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
+import 'package:flutter_universal_router/route.dart';
 import 'package:localization/generated/l10n.dart';
 import 'package:provider/provider.dart';
-import 'package:router/path_handler.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Footer extends StatelessWidget {

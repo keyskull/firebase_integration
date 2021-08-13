@@ -25,24 +25,22 @@ environment:
 
 
 dependencies:
-  router:
-    path: ./packages/router
+  flutter_universal_router:
+    path: ./packages/flutter_universal_router
 
-  firebase_integration:
-    path: ./packages/firebase_integration
+  flutter_firebase_integration:
+    path: ./packages/flutter_firebase_integration
 
 
   localization:
     path: ./packages/localization
 
-  universal_scroll_view:
-    path: ./packages/universal_scroll_view
 
   utilities:
     path: ./packages/utilities
 
-  framework:
-    path: ./packages/framework
+  flutter_display_layer_framework:
+    path: ./packages/flutter_display_layer_framework
 
   shared_preferences: ^2.0.6
 

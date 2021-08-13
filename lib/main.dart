@@ -1,6 +1,7 @@
 import 'package:devicelocale/devicelocale.dart';
-import 'package:firebase_integration/firebase.dart' deferred as firebase;
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase_integration/firebase.dart'
+    deferred as firebase;
 import 'package:intl/intl.dart';
 
 import 'platforms/web_plugins_locator.dart'

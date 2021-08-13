@@ -1,12 +1,10 @@
 import 'package:after_layout/after_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_universal_router/init_router_base.dart';
+import 'package:flutter_universal_router/route.dart';
 import 'package:localization/generated/l10n.dart';
 import 'package:provider/provider.dart';
-import 'package:router/init_router_base.dart';
-import 'package:router/path_handler.dart';
-import 'package:router/route_information_parser.dart';
-import 'package:router/router_delegate.dart';
 import 'package:utilities/screen_size.dart';
 
 import 'init_router.dart';

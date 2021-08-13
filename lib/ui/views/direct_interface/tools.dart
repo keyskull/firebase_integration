@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:framework/windows/window_layer.dart';
+import 'package:flutter_display_layer_framework/windows/window_layer.dart';
 
 class Tools extends StatelessWidget with SingleWindowInterfaceMixin {
   @override
