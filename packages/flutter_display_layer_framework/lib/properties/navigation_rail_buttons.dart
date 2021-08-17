@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+part of '../framework.dart';
 
 const buttonPaths = [
   'profile',
@@ -10,13 +10,13 @@ const buttonPaths = [
   'about-us'
 ];
 const buttonNames = [
-  Text('Profile'),
-  Text('Home'),
-  Text('Dashboard'),
-  Text('Blog'),
-  Text('Projects'),
-  Text('Tools'),
-  Text('About Us')
+  'Profile',
+  'Home',
+  'Dashboard',
+  'Blog',
+  'Projects',
+  'Tools',
+  'About Us'
 ];
 const buttonIcons = [
   Icon(Icons.person),
@@ -36,3 +36,17 @@ const buttonSelectedIcons = [
   Icon(Icons.build_circle_outlined),
   Icon(Icons.album_outlined)
 ];
+
+class NavigationRailButtons {
+  final List<String> buttonPaths;
+  final List<String> buttonNames;
+  final List<Icon> buttonIcons;
+  final List<Icon> buttonSelectedIcons;
+
+  NavigationRailButtons(this.buttonPaths, this.buttonNames, this.buttonIcons,
+      this.buttonSelectedIcons);
+}
+
+final NavigationRailButtons defaultNavigationRailButtons =
+    NavigationRailButtons(
+        buttonPaths, buttonNames, buttonIcons, buttonSelectedIcons);

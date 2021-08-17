@@ -1,4 +1,4 @@
-part of 'framework.dart';
+part of '../framework.dart';
 
 Map<String, bool Function(Notification notification)>
     globalNotificationListeners = {};
@@ -36,7 +36,7 @@ class DecorationLayerState extends State<DecorationLayer>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBarBuilder(_appBarHeight, context),
+      appBar: _appBarBuilder(_appBarHeight, context),
       body: Stack(alignment: Alignment.topCenter, children: [
         _notificationListener((child is SingleWindowInterfaceMixin)
             ? ((child as SingleWindowInterfaceMixin)

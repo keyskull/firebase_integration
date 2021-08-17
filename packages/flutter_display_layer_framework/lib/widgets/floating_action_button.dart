@@ -1,11 +1,14 @@
+import 'dart:math';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pointer_interceptor/pointer_interceptor.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:utilities/screen_size.dart';
 
-import '/windows/window_layer.dart';
+import '../framework.dart';
 
-final floatingActionButtons = (context,
+final defaultFloatingActionButtons = (context,
         {required Function() switchNavigatorRailState,
         required Function() switchContactButtonState,
         required bool hiddenNavigation,
@@ -17,8 +20,8 @@ final floatingActionButtons = (context,
         alignment: Alignment.bottomRight,
         children: [
           Padding(
-              padding:
-                  EdgeInsets.only(right: ScreenSize.getScreenSize.width - 85),
+              padding: EdgeInsets.only(
+                  right: ScreenSize.getFlashScreenSize(context).width - 85),
               child: PointerInterceptor(
                   child: FloatingActionButton(
                 onPressed: () {
@@ -29,9 +32,10 @@ final floatingActionButtons = (context,
                     : Icon(Icons.arrow_back_ios_outlined),
                 heroTag: "hidden",
               ))),
-          Column(mainAxisAlignment: MainAxisAlignment.end, children: [
-            PointerInterceptor(
-                child: FloatingActionButton(
+          PointerInterceptor(
+              child:
+                  Column(mainAxisAlignment: MainAxisAlignment.end, children: [
+            FloatingActionButton(
               mini: true,
               onPressed: () {
                 switchContactButtonState();
@@ -42,28 +46,31 @@ final floatingActionButtons = (context,
                   : Icon(Icons.email_outlined),
               backgroundColor: Colors.blue,
               heroTag: "btn2",
-            )),
+            ),
             SizedBox(height: 10),
-            PointerInterceptor(
-                child: FloatingActionButton(
+            FloatingActionButton(
               mini: true,
               onPressed: () {
                 switchContactButtonState();
 
-                windowContainer.openWindow(InstanceBuilder((id) =>
-                    SingleWindowInterfaceMixin.buildWithSingleWindowInterface(
-                      id,
-                      Text('[' +
-                          windowContainer.getWindowIdList().join(',') +
-                          ']'),
-                    )));
+                windowContainer.openWindow(InstanceBuilder(
+                    windowBuilder: (id) => SingleWindowInterfaceMixin
+                            .buildWithSingleWindowInterface(
+                          id,
+                          Container(
+                            color: Colors.blue.withRed(Random().nextInt(255)),
+                            child: Text('[' +
+                                windowContainer.getWindowIdList().join(',') +
+                                ']'),
+                          ),
+                        )));
               },
               child: contactButtonExtended
                   ? Icon(Icons.message)
                   : Icon(Icons.message_outlined),
               backgroundColor: Colors.blue,
-            ))
-          ])
+            )
+          ]))
         ],
       ),
     );

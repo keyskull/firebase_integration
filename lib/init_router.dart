@@ -27,8 +27,6 @@ class InitRouter {
           .then((_) => article.Article(path: parameters ?? '')));
 
   InitRouter(BuildContext context) {
-    setNavigationLayer(({Key? key, required Widget child}) =>
-        NavigationLayer(key: key, child: child));
     setDecorationLayer(
         ({Key? key, required Widget child, AppBar? appBar}) => DecorationLayer(
               key: key,

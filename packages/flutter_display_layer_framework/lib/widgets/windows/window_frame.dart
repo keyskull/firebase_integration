@@ -1,4 +1,10 @@
-part of 'window_layer.dart';
+import 'dart:developer';
+
+import 'package:flutter/material.dart';
+import 'package:pointer_interceptor/pointer_interceptor.dart';
+import 'package:utilities/screen_size.dart';
+
+import '../../framework.dart';
 
 final boxConstraints = BoxConstraints(
     minHeight: 200,

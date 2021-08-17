@@ -1,16 +1,4 @@
-import 'dart:developer';
-
-import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:pointer_interceptor/pointer_interceptor.dart';
-import 'package:universal_scroll_view/universal_single_child_scroll_view.dart';
-import 'package:utilities/screen_size.dart';
-import 'package:uuid/uuid.dart';
-
-import '/windows/default_window_frame.dart';
-
-part 'single_window_interface.dart';
-part 'window_frame.dart';
+part of "../framework.dart";
 
 WindowContainer windowContainer = WindowContainer();
 
@@ -96,9 +84,9 @@ class _InstanceLayerState extends State<InstanceLayer> {
 class InstanceBuilder {
   late String id;
   Offset position = new Offset(100, 100);
-  SingleWindowInterfaceMixin Function(String id) windowBuilder;
+  final SingleWindowInterfaceMixin Function(String id) windowBuilder;
 
-  InstanceBuilder(this.windowBuilder);
+  InstanceBuilder({required this.windowBuilder});
 }
 
 ///

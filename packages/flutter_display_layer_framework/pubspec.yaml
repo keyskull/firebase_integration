@@ -21,11 +21,15 @@ dependencies:
   utilities:
     path: ../utilities
 
+  markdown_editor:
+    path: ../markdown_editor
+
   universal_scroll_view: ^1.0.4
   provider: ^5.0.0
   pointer_interceptor: ^0.9.0+1
   url_launcher: ^6.0.4
   uuid: 3.0.4
+  shared_preferences: ^2.0.6
 
 dev_dependencies:
   flutter_test:

@@ -5,32 +5,35 @@ import 'package:pointer_interceptor/pointer_interceptor.dart';
 import 'package:provider/provider.dart';
 import 'package:utilities/screen_size.dart';
 
-import '/properties/navigation_rail_buttons.dart';
 import '../framework.dart';
 
 /// This is the stateful widget that the main application instantiates.
 class CustomNavigationRail extends StatefulWidget {
   final Widget child;
+  final NavigationRailButtons navigationRailButtons;
+  final int defaultIndex;
 
-  CustomNavigationRail({
-    required Key key,
-    required this.child,
-  }) : super(key: key);
+  CustomNavigationRail(
+      {required Key key,
+      required this.child,
+      required this.navigationRailButtons,
+      this.defaultIndex = 0})
+      : super(key: key);
 
   @override
-  CustomNavigationRailState createState() => CustomNavigationRailState(
-        child: child,
-      );
+  CustomNavigationRailState createState() =>
+      CustomNavigationRailState(child, navigationRailButtons, defaultIndex);
 }
 
 /// This is the private State class that goes with MyStatefulWidget.
 class CustomNavigationRailState extends State<CustomNavigationRail>
     with SingleTickerProviderStateMixin {
   final Widget child;
+  final NavigationRailButtons navigationRailButtons;
+  final int defaultIndex;
 
-  CustomNavigationRailState({
-    required this.child,
-  });
+  CustomNavigationRailState(
+      this.child, this.navigationRailButtons, this.defaultIndex);
 
   late AnimationController _controller;
 
@@ -65,11 +68,11 @@ class CustomNavigationRailState extends State<CustomNavigationRail>
 
   @override
   void initState() {
+    _selectedIndex = defaultIndex;
     _controller = AnimationController(
       duration: const Duration(milliseconds: 300),
       vsync: this,
     );
-    // _selectedIndex = 0;
     // controller.forward();
 
     super.initState();
@@ -140,7 +143,7 @@ class CustomNavigationRailState extends State<CustomNavigationRail>
                 child: Row(
                   children: [
                     Container(
-                        color: mainThemeColor,
+                        color: Theme.of(context).colorScheme.primary,
                         child: PointerInterceptor(
                           child: NavigationRailTheme(
                             data: NavigationRailThemeData(
@@ -155,22 +158,26 @@ class CustomNavigationRailState extends State<CustomNavigationRail>
                                 extended: _extend,
                                 selectedIndex: _selectedIndex,
                                 onDestinationSelected: (int index) {
-                                  final key = (((globalNavigatorKey
-                                              .currentState!
-                                              .widget
-                                              .pages
-                                              .first
-                                              .key as ValueKey)
-                                          .value) as RouteData)
-                                      .path
-                                      .substring(1);
-                                  if (key != buttonPaths[index]) {
-                                    Provider.of<PathHandler>(context,
-                                            listen: false)
-                                        .changePath(buttonPaths[index]);
-                                  }
-
-                                  _selectedIndex = index;
+                                  setState(() {
+                                    final key = (((globalNavigatorKey
+                                                .currentState!
+                                                .widget
+                                                .pages
+                                                .first
+                                                .key as ValueKey)
+                                            .value) as RouteData)
+                                        .path
+                                        .substring(1);
+                                    if (key !=
+                                        navigationRailButtons
+                                            .buttonPaths[index]) {
+                                      Provider.of<PathHandler>(context,
+                                              listen: false)
+                                          .changePath(navigationRailButtons
+                                              .buttonPaths[index]);
+                                    }
+                                    _selectedIndex = index;
+                                  });
                                 },
                                 labelType: NavigationRailLabelType.none,
                                 leading: Stack(
@@ -196,12 +203,14 @@ class CustomNavigationRailState extends State<CustomNavigationRail>
                                   ],
                                 ),
                                 destinations: new List.generate(
-                                    buttonNames.length,
+                                    navigationRailButtons.buttonNames.length,
                                     (index) => NavigationRailDestination(
-                                          icon: buttonIcons[index],
-                                          selectedIcon:
-                                              buttonSelectedIcons[index],
-                                          label: buttonNames[index],
+                                          icon: navigationRailButtons
+                                              .buttonIcons[index],
+                                          selectedIcon: navigationRailButtons
+                                              .buttonSelectedIcons[index],
+                                          label: Text(navigationRailButtons
+                                              .buttonNames[index]),
                                         ))),
                           ),
                         )),
