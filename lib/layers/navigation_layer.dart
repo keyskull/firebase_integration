@@ -1,22 +1,35 @@
-part of 'framework.dart';
+part of '../framework.dart';
 
 class NavigationLayer extends StatefulWidget {
   final Widget child;
   final GlobalKey<CustomNavigationRailState> navigationRailKey = GlobalKey();
+  final int defaultNavigationSelectedIndex;
+  final NavigationRailButtons? navigationRailButtons;
 
-  NavigationLayer({Key? key, required this.child}) : super(key: key);
+  NavigationLayer(
+      {Key? key,
+      required this.child,
+      this.defaultNavigationSelectedIndex = 0,
+      this.navigationRailButtons})
+      : super(key: key);
 
   @override
-  NavigationLayerState createState() =>
-      NavigationLayerState(child: child, navigationRailKey: navigationRailKey);
+  NavigationLayerState createState() => NavigationLayerState(
+      child,
+      navigationRailKey,
+      defaultNavigationSelectedIndex,
+      navigationRailButtons ?? defaultNavigationRailButtons);
 }
 
 class NavigationLayerState extends State<NavigationLayer>
     with TickerProviderStateMixin {
   final Widget child;
   final GlobalKey<CustomNavigationRailState> navigationRailKey;
+  final int defaultNavigationSelectedIndex;
+  final NavigationRailButtons navigationRailButtons;
 
-  NavigationLayerState({required this.child, required this.navigationRailKey});
+  NavigationLayerState(this.child, this.navigationRailKey,
+      this.defaultNavigationSelectedIndex, this.navigationRailButtons);
 
   bool hiddenNavigation = false;
   bool contactButtonExtended = true;
@@ -52,6 +65,8 @@ class NavigationLayerState extends State<NavigationLayer>
     final customNavigationRail = CustomNavigationRail(
       key: navigationRailKey,
       child: child,
+      navigationRailButtons: navigationRailButtons,
+      defaultIndex: defaultNavigationSelectedIndex,
     );
 
     return Scaffold(
@@ -63,7 +78,7 @@ class NavigationLayerState extends State<NavigationLayer>
                 onPressed: () => navigationRailKey.currentState?..closeRail(),
                 child: customNavigationRail)),
         // floatingActionButtonAnimator: ,
-        floatingActionButton: floatingActionButtons(
+        floatingActionButton: defaultFloatingActionButtons(
           context,
           switchNavigatorRailState: _switchNavigatorRailState,
           switchContactButtonState: _switchContactButtonState,

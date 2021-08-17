@@ -1,9 +1,11 @@
-part of 'window_layer.dart';
+part of '../../framework.dart';
 
 enum ScreenMode { window, fullScreen, onlyFullScreen }
 
 mixin SingleWindowInterfaceMixin on Widget {
-  ScreenMode _screenMode = ScreenMode.onlyFullScreen;
+  late ScreenMode _screenMode = ScreenMode.onlyFullScreen;
+  late String _id = "Unknown Instance";
+
   Widget _scrollview(Widget child) =>
       scrollable() ? UniversalSingleChildScrollView(child: child) : child;
 
@@ -20,8 +22,7 @@ mixin SingleWindowInterfaceMixin on Widget {
     }
   }
 
-  late String _id = "Unknown Instance";
-
+  @protected
   String getId() => _id;
 
   bool scrollable();
