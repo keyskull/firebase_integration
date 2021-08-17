@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_display_layer_framework/windows/window_layer.dart';
+import 'package:flutter_display_layer_framework/framework.dart';
 import 'package:flutter_universal_router/route.dart';
 import 'package:localization/generated/l10n.dart';
 import 'package:provider/provider.dart';

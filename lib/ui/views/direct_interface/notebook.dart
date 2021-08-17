@@ -7,15 +7,23 @@ import 'package:http/http.dart' as http;
 import 'package:logger/logger.dart';
 import 'package:utilities/custom_log_printer.dart';
 
-class Dashboard extends StatefulWidget with SingleWindowInterfaceMixin {
+class Notebook extends StatefulWidget with SingleWindowInterfaceMixin {
+  final String path;
+
+  Notebook({Key? key, this.path = ""}) : super(key: key);
+
   @override
-  State<StatefulWidget> createState() => DashboardState();
+  State<StatefulWidget> createState() => NotebookState(path);
 
   @override
   bool scrollable() => true;
 }
 
-class DashboardState extends State<Dashboard> {
+class NotebookState extends State<Notebook> {
+  final String path;
+
+  NotebookState(this.path);
+
   final logger = Logger(printer: CustomLogPrinter('Dashboard'));
 
   Widget content = Column();
@@ -31,7 +39,8 @@ class DashboardState extends State<Dashboard> {
 
     final mainPath = encoderUrl(sharingUrl(authKey, mainResId));
     logger.i(mainPath);
-    return FutureBuilder(
+
+    final menu = FutureBuilder(
       future: http.get(Uri.parse(
           "https://api.onedrive.com/v1.0/shares/s!AEGheyPehZ6ZjZcb/driveItem/children?select=name,webUrl")),
       builder: (BuildContext context, AsyncSnapshot<http.Response> snapshot) {
@@ -123,5 +132,31 @@ class DashboardState extends State<Dashboard> {
           return CircularProgressIndicator();
       },
     );
+    final view = Container(
+        color: Colors.white60,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Flexible(
+              fit: FlexFit.tight,
+              flex: 1,
+              child: menu,
+            ),
+            VerticalDivider(
+              thickness: 50,
+              color: Colors.black,
+            ),
+            Flexible(
+                fit: FlexFit.loose,
+                flex: 5,
+                child: Container(
+                  width: 1000,
+                  height: 1000,
+                  color: Colors.amber,
+                ))
+          ],
+        ));
+    return view;
   }
 }

@@ -15,6 +15,7 @@ import 'ui/views/direct_interface/blog/blog_page.dart' deferred as blog;
 import 'ui/views/direct_interface/contact.dart' deferred as contact;
 import 'ui/views/direct_interface/dashboard.dart' deferred as dashboard;
 import 'ui/views/direct_interface/home.dart' deferred as home;
+import 'ui/views/direct_interface/notebook.dart' deferred as notebook;
 import 'ui/views/direct_interface/projects.dart' deferred as projects;
 import 'ui/views/direct_interface/tools.dart' deferred as tools;
 
@@ -109,6 +110,12 @@ class InitRouter {
         title: 'Tools',
         pageBuilder: (_, __) =>
             tools.loadLibrary().then((value) => tools.Tools()));
+
+    RouteInstance(
+        routePath: "notebook",
+        title: 'Notebook',
+        pageBuilder: (parameters, _) =>
+            notebook.loadLibrary().then((value) => notebook.Notebook()));
 
     RouteInstance(
         routePath: 'web_browser',

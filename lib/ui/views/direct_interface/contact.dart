@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_display_layer_framework/windows/window_layer.dart';
+import 'package:flutter_display_layer_framework/framework.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:localization/generated/l10n.dart';
 import 'package:url_launcher/url_launcher.dart';

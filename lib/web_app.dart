@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:after_layout/after_layout.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_display_layer_framework/framework.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_universal_router/init_router_base.dart';
 import 'package:flutter_universal_router/route.dart';
@@ -29,8 +32,17 @@ class _WebAppState extends State<WebApp> with AfterLayoutMixin {
         builder: (context, Widget? child) {
           ScreenSize.initScreenSize(context);
           InitRouter(context);
-          return child ??
+          final unknown =
               (InitRouterBase.unknownPage.getPage() as MaterialPage).child;
+          log("${child.runtimeType.toString()}");
+
+          return Overlay(
+            initialEntries: [
+              OverlayEntry(
+                  builder: (context) =>
+                      NavigationLayer(child: child ?? unknown)),
+            ],
+          );
         },
         localizationsDelegates: [
           S.delegate,

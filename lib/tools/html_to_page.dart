@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_display_layer_framework/windows/window_layer.dart';
+import 'package:flutter_display_layer_framework/framework.dart';
 import 'package:flutter_universal_router/pages/404.dart';
 import 'package:flutter_universal_router/ui/views/direct_interface/loading.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
