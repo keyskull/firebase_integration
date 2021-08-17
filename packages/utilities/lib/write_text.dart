@@ -1,14 +1,6 @@
 import 'package:flutter/material.dart';
 
-///
-/// 字符间隔默认时长
-///
-const int _kDefaultMillSeconds = 300;
-
-///
-/// 默认光标
-///
-const Widget _kDefaultCursor = const _DefaultCursor();
+const int _defaultMillSeconds = 300;
 
 ///
 /// desc: WriteText 是逐步显示文本的动画组件，像手写一样的效果。
@@ -19,34 +11,16 @@ class WriteText extends StatefulWidget {
   ///
   final String data;
 
-  ///
-  /// 是否显示光标
-  ///
   final bool showCursor;
 
-  ///
-  /// 光标组件
-  ///
-  final Widget cursor;
+  final Widget? cursor;
 
-  ///
-  /// 字符间隔时长
-  ///
   final int perMillSeconds;
 
-  ///
-  /// 激活状态文本的样式
-  ///
-  final TextStyle textStyle;
+  final TextStyle? textStyle;
 
-  ///
-  /// 是否自动启动
-  ///
   final bool autoStart;
 
-  ///
-  /// 控制器
-  ///
   final WriteTextController? controller;
 
   const WriteText({
@@ -54,9 +28,9 @@ class WriteText extends StatefulWidget {
     required this.data,
     this.controller,
     this.showCursor = true,
-    this.cursor = _kDefaultCursor,
-    this.perMillSeconds = _kDefaultMillSeconds,
-    required this.textStyle,
+    this.cursor,
+    this.perMillSeconds = _defaultMillSeconds,
+    this.textStyle,
     this.autoStart = true,
   })  : assert(data != null, 'data cannot be null'),
         assert(perMillSeconds != null, 'perDuration cannot be null'),
@@ -85,16 +59,10 @@ class _WriteTextState extends State<WriteText>
     super.initState();
   }
 
-  ///
-  /// 启动
-  ///
   start() {
     _animationController.forward();
   }
 
-  ///
-  /// 停止
-  ///
   stop() {
     _animationController.stop();
   }
@@ -122,7 +90,7 @@ class _WriteTextState extends State<WriteText>
                 if (widget.showCursor)
                   WidgetSpan(
                       child: StepTextCursor(
-                    cursor: widget.cursor ?? _kDefaultCursor,
+                    cursor: widget.cursor ?? const _DefaultCursor(),
                   )),
               ]),
         );
