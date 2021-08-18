@@ -80,10 +80,11 @@ void main() {
           buttonPaths, buttonNames, buttonIcons, buttonSelectedIcons),
       defaultNavigationSelectedIndex: 0,
     ),
-    theme: ThemeData.from(
+    theme: ThemeData(
         colorScheme: ColorScheme.fromSwatch(
-      primarySwatch: MaterialColor(Colors.black.value, color),
-      accentColor: Colors.lime,
-    )),
+            primarySwatch: MaterialColor(Colors.black.value, color),
+            accentColor: Colors.lime,
+            brightness: Brightness.dark),
+        textTheme: TextTheme()),
   ));
 }

@@ -44,7 +44,6 @@ final defaultFloatingActionButtons = (context,
               child: contactButtonExtended
                   ? Icon(Icons.email)
                   : Icon(Icons.email_outlined),
-              backgroundColor: Colors.blue,
               heroTag: "btn2",
             ),
             SizedBox(height: 10),
@@ -68,7 +67,6 @@ final defaultFloatingActionButtons = (context,
               child: contactButtonExtended
                   ? Icon(Icons.message)
                   : Icon(Icons.message_outlined),
-              backgroundColor: Colors.blue,
             )
           ]))
         ],

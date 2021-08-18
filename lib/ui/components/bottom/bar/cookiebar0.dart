@@ -61,7 +61,6 @@ class CookieBar0State extends State<CookieBar0> {
                   flex: 1,
                   child: MaterialButton(
                       child: Text("Accept", style: fontSize),
-                      color: Colors.blue,
                       mouseCursor: SystemMouseCursors.click,
                       onPressed: () {
                         setState(() {
