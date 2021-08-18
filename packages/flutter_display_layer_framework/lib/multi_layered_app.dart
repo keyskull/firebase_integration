@@ -16,26 +16,32 @@ class MultiLayeredApp extends StatefulWidget {
   final void Function(BuildContext context) initProcess;
   final Widget Function(Widget child)? navigationLayerBuilder;
   final ThemeData? theme;
+  final ThemeData? darkTheme;
 
   MultiLayeredApp(
       {Key? key,
       this.initProcess = _func,
       this.navigationLayerBuilder,
-      this.theme})
+      this.theme,
+      this.darkTheme})
       : super(key: key);
 
   @override
   _MultiLayeredAppAppState createState() => _MultiLayeredAppAppState(
-      initProcess, navigationLayerBuilder ?? defaultNavigationLayer, theme);
+      initProcess,
+      navigationLayerBuilder ?? defaultNavigationLayer,
+      theme,
+      darkTheme);
 }
 
 class _MultiLayeredAppAppState extends State<MultiLayeredApp> {
   final void Function(BuildContext context) initProcess;
   final Widget Function(Widget child) navigationLayerBuilder;
   final ThemeData? theme;
+  final ThemeData? darkTheme;
 
-  _MultiLayeredAppAppState(
-      this.initProcess, this.navigationLayerBuilder, this.theme);
+  _MultiLayeredAppAppState(this.initProcess, this.navigationLayerBuilder,
+      this.theme, this.darkTheme);
 
   String title = '';
 
@@ -46,6 +52,7 @@ class _MultiLayeredAppAppState extends State<MultiLayeredApp> {
       create: (context) => PathHandler(),
       child: MaterialApp.router(
         theme: theme,
+        darkTheme: darkTheme,
         title: title,
         routerDelegate: RouterDelegateInherit(),
         routeInformationParser: RouteInformationParserInherit(),
