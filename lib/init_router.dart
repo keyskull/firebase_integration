@@ -9,15 +9,15 @@ import 'package:localization/generated/l10n.dart';
 import 'package:web_browser/web_browser.dart' deferred as web_browser;
 
 import 'tools/html_to_page.dart' deferred as htmlToPage;
-import 'ui/views/direct_interface/about_me.dart' deferred as aboutMe;
-import 'ui/views/direct_interface/blog/article_page.dart' deferred as article;
-import 'ui/views/direct_interface/blog/blog_page.dart' deferred as blog;
-import 'ui/views/direct_interface/contact.dart' deferred as contact;
-import 'ui/views/direct_interface/dashboard.dart' deferred as dashboard;
-import 'ui/views/direct_interface/home.dart' deferred as home;
-import 'ui/views/direct_interface/notebook.dart' deferred as notebook;
-import 'ui/views/direct_interface/projects.dart' deferred as projects;
-import 'ui/views/direct_interface/tools.dart' deferred as tools;
+import 'ui/views/screens/about_me.dart' deferred as aboutMe;
+import 'ui/views/screens/blog/article_page.dart' deferred as article;
+import 'ui/views/screens/blog/blog_page.dart' deferred as blog;
+import 'ui/views/screens/contact.dart' deferred as contact;
+import 'ui/views/screens/dashboard.dart' deferred as dashboard;
+import 'ui/views/screens/home.dart' deferred as home;
+import 'ui/views/screens/notebook.dart' deferred as notebook;
+import 'ui/views/screens/projects.dart' deferred as projects;
+import 'ui/views/screens/tools.dart' deferred as tools;
 
 class InitRouter {
   final blogBuilder = ((parameters, _) => parameters == ''

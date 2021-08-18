@@ -10,5 +10,8 @@ class LicenseInformationBottomBar extends StatelessWidget {
           decoration: BoxDecoration(
               color: Colors.white70,
               border: const Border(top: BorderSide(width: 1))),
-          child: Text(S.of(context).license_announcement)));
+          child: Text(
+            S.of(context).license_announcement,
+            style: TextStyle(color: Colors.black, fontSize: 15),
+          )));
 }

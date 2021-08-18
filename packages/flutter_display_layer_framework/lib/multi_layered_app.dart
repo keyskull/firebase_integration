@@ -9,12 +9,14 @@ import 'package:provider/provider.dart';
 import 'package:utilities/screen_size.dart';
 
 import 'framework.dart';
+import 'widgets/bottom/bar/license_information_bottom_bar.dart';
 
 void _func(BuildContext context) {}
 
 class MultiLayeredApp extends StatefulWidget {
   final void Function(BuildContext context) initProcess;
   final Widget Function(Widget child)? navigationLayerBuilder;
+  final Widget Function(Widget child)? decorationLayerBuilder;
   final ThemeData? theme;
   final ThemeData? darkTheme;
 
@@ -22,6 +24,7 @@ class MultiLayeredApp extends StatefulWidget {
       {Key? key,
       this.initProcess = _func,
       this.navigationLayerBuilder,
+      this.decorationLayerBuilder,
       this.theme,
       this.darkTheme})
       : super(key: key);
@@ -30,6 +33,12 @@ class MultiLayeredApp extends StatefulWidget {
   _MultiLayeredAppAppState createState() => _MultiLayeredAppAppState(
       initProcess,
       navigationLayerBuilder ?? defaultNavigationLayer,
+      decorationLayerBuilder ??
+          (child) => Container(
+                child: Stack(
+                  children: [child, LicenseInformationBottomBar()],
+                ),
+              ),
       theme,
       darkTheme);
 }
@@ -37,11 +46,12 @@ class MultiLayeredApp extends StatefulWidget {
 class _MultiLayeredAppAppState extends State<MultiLayeredApp> {
   final void Function(BuildContext context) initProcess;
   final Widget Function(Widget child) navigationLayerBuilder;
+  final Widget Function(Widget child) decorationLayerBuilder;
   final ThemeData? theme;
   final ThemeData? darkTheme;
 
   _MultiLayeredAppAppState(this.initProcess, this.navigationLayerBuilder,
-      this.theme, this.darkTheme);
+      this.decorationLayerBuilder, this.theme, this.darkTheme);
 
   String title = '';
 
@@ -66,8 +76,8 @@ class _MultiLayeredAppAppState extends State<MultiLayeredApp> {
           return Overlay(
             initialEntries: [
               OverlayEntry(
-                  builder: (context) =>
-                      navigationLayerBuilder(child ?? unknown)),
+                  builder: (context) => decorationLayerBuilder(
+                      navigationLayerBuilder(child ?? unknown))),
             ],
           );
         },
