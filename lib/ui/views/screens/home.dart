@@ -1,6 +1,6 @@
-import 'package:cullen/ui/components/bottom/footer.dart';
-import 'package:cullen/ui/components/cover/home_page_cover.dart';
-import 'package:cullen/ui/components/sliver_list/sliver_appbar_delegate.dart';
+import 'package:cullen/ui/widgets/bottom/footer.dart';
+import 'package:cullen/ui/widgets/cover/home_page_cover.dart';
+import 'package:cullen/ui/widgets/sliver_list/sliver_appbar_delegate.dart';
 import 'package:flutter/material.dart' hide Step;
 import 'package:flutter/rendering.dart';
 import 'package:localization/generated/l10n.dart';

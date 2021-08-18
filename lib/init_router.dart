@@ -1,4 +1,3 @@
-import 'package:cullen/ui/components/bottom/bar/cookiebar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_display_layer_framework/framework.dart';
 import 'package:flutter_firebase_integration/ui/views/login.dart'
@@ -18,6 +17,7 @@ import 'ui/views/screens/home.dart' deferred as home;
 import 'ui/views/screens/notebook.dart' deferred as notebook;
 import 'ui/views/screens/projects.dart' deferred as projects;
 import 'ui/views/screens/tools.dart' deferred as tools;
+import 'ui/widgets/bottom/bar/cookiebar.dart';
 
 class InitRouter {
   final blogBuilder = ((parameters, _) => parameters == ''

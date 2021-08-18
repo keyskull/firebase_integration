@@ -1,7 +1,7 @@
 library sliver_items;
 
-import 'package:cullen/ui/components/buttons/quick_access_button.dart';
-import 'package:cullen/ui/components/sliver/transition_sliver_appbar.dart';
+import 'package:cullen/ui/widgets/buttons/quick_access_button.dart';
+import 'package:cullen/ui/widgets/sliver/transition_sliver_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:utilities/screen_size.dart';

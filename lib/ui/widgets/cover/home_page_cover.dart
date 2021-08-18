@@ -1,9 +1,10 @@
 import 'package:cullen/properties/common.dart';
-import 'package:cullen/ui/components/sliver_list/sliver_appbar_delegate.dart';
 import 'package:flutter/material.dart';
 import 'package:localization/generated/l10n.dart';
 import 'package:utilities/screen_size.dart';
 import 'package:utilities/write_text.dart';
+
+import '../sliver_list/sliver_appbar_delegate.dart';
 
 homePageCover(
         {required BuildContext context,

@@ -1,12 +1,12 @@
 import 'dart:ui';
 
-import 'package:cullen/ui/components/bottom/footer.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_display_layer_framework/framework.dart';
 import 'package:localization/generated/l10n.dart';
 
-import '../../../components/buttons/blog_page_button.dart';
+import '../../../widgets/bottom/footer.dart';
+import '../../../widgets/buttons/blog_page_button.dart';
 
 void main() {
   runApp(Blog());
