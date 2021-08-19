@@ -26,7 +26,7 @@ class CookieBar0State extends State<CookieBar0> {
 
   @override
   Widget build(BuildContext context) {
-    const fontSize = const TextStyle(fontSize: 15);
+    const fontSize = const TextStyle(color: Colors.black, fontSize: 15);
     Widget bar = Align(
         alignment: Alignment.bottomLeft,
         child: Container(
@@ -38,16 +38,19 @@ class CookieBar0State extends State<CookieBar0> {
           ),
           padding: EdgeInsets.all(10),
           child: Row(
-            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisSize: MainAxisSize.max,
             children: [
-              Expanded(
+              Flexible(
                   flex: 5,
+                  fit: FlexFit.loose,
                   child: const Text(
                     'This site uses cookies. To see how cookies are used, please review our cookie notice. If you agree to our use of cookies, please continue to use our site.',
                     style: fontSize,
                   )),
-              Expanded(
-                  flex: 1,
+              Flexible(
+                  flex: 2,
+                  fit: FlexFit.tight,
                   child: InkWell(
                     child: const Text(
                       'cookie notice',
@@ -57,9 +60,11 @@ class CookieBar0State extends State<CookieBar0> {
                         Provider.of<PathHandler>(context, listen: false)
                             .changePath('cookie-policy'),
                   )),
-              Expanded(
+              Flexible(
                   flex: 1,
+                  fit: FlexFit.tight,
                   child: MaterialButton(
+                      color: Theme.of(context).colorScheme.secondary,
                       child: Text("Accept", style: fontSize),
                       mouseCursor: SystemMouseCursors.click,
                       onPressed: () {
@@ -68,7 +73,7 @@ class CookieBar0State extends State<CookieBar0> {
                               value.setBool('cookie_accepted', true));
                           _cookieAccepted = true;
                         });
-                      }))
+                      })),
             ],
           ),
         ));
