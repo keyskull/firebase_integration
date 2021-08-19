@@ -43,6 +43,7 @@ class _InstanceLayerState extends State<InstanceLayer> {
             e.position.dy.toString() +
             "]");
 
+        /// TODO: Issue impacting: the last excited instance doesn't update the state of active;
         return Positioned(
             left: e.position.dx,
             top: e.position.dy,
