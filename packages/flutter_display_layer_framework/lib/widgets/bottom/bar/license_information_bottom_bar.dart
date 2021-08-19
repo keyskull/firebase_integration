@@ -12,6 +12,10 @@ class LicenseInformationBottomBar extends StatelessWidget {
               border: const Border(top: BorderSide(width: 1))),
           child: Text(
             S.of(context).license_announcement,
-            style: TextStyle(color: Colors.black, fontSize: 15),
+            style: TextStyle(
+                decoration: TextDecoration.none,
+                color: Colors.black,
+                fontSize: 15,
+                fontWeight: FontWeight.normal),
           )));
 }

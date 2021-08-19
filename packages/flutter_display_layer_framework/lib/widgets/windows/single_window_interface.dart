@@ -2,6 +2,23 @@ part of '../../framework.dart';
 
 enum ScreenMode { window, fullScreen, onlyFullScreen }
 
+class SingleWindowInterface extends StatelessWidget {
+  final Widget child;
+
+  const SingleWindowInterface({Key? key, required this.child})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) => child;
+
+  static SingleWindowInterface buildWithSingleWindowInterface(
+          String id, Widget child,
+          {bool isScrollable = false,
+          ScreenMode screenMode = ScreenMode.window}) =>
+      new _InstanceSingleWindowInterface(id, child)
+          .buildSingleWindowInterface();
+}
+
 mixin SingleWindowInterfaceMixin on Widget {
   late ScreenMode _screenMode = ScreenMode.onlyFullScreen;
   late String _id = "Unknown Instance";
@@ -35,16 +52,10 @@ mixin SingleWindowInterfaceMixin on Widget {
   void setScreenMode(ScreenMode screenMode) => _screenMode = screenMode;
 
   @protected
-  Widget buildSingleWindowInterface() {
+  SingleWindowInterface buildSingleWindowInterface() {
     initWindow();
-    return _framework(this);
+    return SingleWindowInterface(child: _framework(this));
   }
-
-  static SingleWindowInterfaceMixin buildWithSingleWindowInterface(
-          String id, Widget child,
-          {bool isScrollable = false,
-          ScreenMode screenMode = ScreenMode.window}) =>
-      new _InstanceSingleWindowInterface(id, child);
 }
 
 class _InstanceSingleWindowInterface extends StatelessWidget

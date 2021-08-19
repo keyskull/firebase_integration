@@ -28,28 +28,28 @@ class InstanceLayer extends StatefulWidget {
 }
 
 class _InstanceLayerState extends State<InstanceLayer> {
+  final logger = Logger(printer: CustomLogPrinter('WindowLayer'));
+
   List<Widget> instances = [];
-  Map<String, Widget> map = {};
+  Map<String, SingleWindowInterface> instanceCache = {};
+
   updateInstances() {
     setState(() {
       instances = windowContainer.instanceBuilders.map((e) {
-        log("generating instance: " + e.id.toString(), name: "window_layer");
-        log(
-            "position: [" +
-                e.position.dx.toString() +
-                ',' +
-                e.position.dy.toString() +
-                "]",
-            name: "window_layer");
+        logger.d("generating instance: " + e.id.toString());
+        logger.d("position: [" +
+            e.position.dx.toString() +
+            ',' +
+            e.position.dy.toString() +
+            "]");
 
         return Positioned(
             left: e.position.dx,
             top: e.position.dy,
-            child: map[e.id] ??
+            child: instanceCache[e.id] ??
                 () {
-                  map[e.id] =
-                      e.windowBuilder(e.id).buildSingleWindowInterface();
-                  return map[e.id]!;
+                  instanceCache[e.id] = e.windowBuilder(e.id);
+                  return instanceCache[e.id]!;
                 }());
       }).toList();
     });
@@ -57,24 +57,14 @@ class _InstanceLayerState extends State<InstanceLayer> {
 
   @override
   void initState() {
-    instances = windowContainer.instanceBuilders
-        .map((e) => Positioned(
-            left: e.position.dx,
-            top: e.position.dy,
-            child: map[e.id] ??
-                () {
-                  map[e.id] =
-                      e.windowBuilder(e.id).buildSingleWindowInterface();
-                  return map[e.id]!;
-                }()))
-        .toList();
+    updateInstances();
     windowContainer.currentState = this;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    log("list: [" + instances.map((e) => e.hashCode).join(',') + ']');
+    logger.i("list: [" + instances.map((e) => e.hashCode).join(',') + ']');
     return Stack(
       children: instances,
     );
@@ -84,7 +74,7 @@ class _InstanceLayerState extends State<InstanceLayer> {
 class InstanceBuilder {
   late String id;
   Offset position = new Offset(100, 100);
-  final SingleWindowInterfaceMixin Function(String id) windowBuilder;
+  final SingleWindowInterface Function(String id) windowBuilder;
 
   InstanceBuilder({required this.windowBuilder});
 }
@@ -94,7 +84,6 @@ class InstanceBuilder {
 ///
 class WindowContainer {
   List<InstanceBuilder> instanceBuilders = [];
-  Map<String, SingleWindowInterfaceMixin> instances = {};
 
   _InstanceLayerState? currentState;
 

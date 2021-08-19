@@ -34,21 +34,19 @@ class MultiLayeredApp extends StatefulWidget {
       initProcess,
       navigationLayerBuilder ?? defaultNavigationLayer,
       decorationLayerBuilder ??
-          (child) => Container(
-                child: Stack(
-                  children: [child, LicenseInformationBottomBar()],
-                ),
+          (child) => Stack(
+                children: [child, LicenseInformationBottomBar()],
               ),
-      theme,
-      darkTheme);
+      theme ?? ThemeData.light(),
+      darkTheme ?? ThemeData.dark());
 }
 
 class _MultiLayeredAppAppState extends State<MultiLayeredApp> {
   final void Function(BuildContext context) initProcess;
   final Widget Function(Widget child) navigationLayerBuilder;
   final Widget Function(Widget child) decorationLayerBuilder;
-  final ThemeData? theme;
-  final ThemeData? darkTheme;
+  final ThemeData theme;
+  final ThemeData darkTheme;
 
   _MultiLayeredAppAppState(this.initProcess, this.navigationLayerBuilder,
       this.decorationLayerBuilder, this.theme, this.darkTheme);
@@ -76,6 +74,7 @@ class _MultiLayeredAppAppState extends State<MultiLayeredApp> {
           return Overlay(
             initialEntries: [
               OverlayEntry(
+                  maintainState: true,
                   builder: (context) => decorationLayerBuilder(
                       navigationLayerBuilder(child ?? unknown))),
             ],

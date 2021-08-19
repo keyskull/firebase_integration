@@ -85,6 +85,6 @@ void main() {
             primarySwatch: MaterialColor(Colors.black.value, color),
             accentColor: Colors.lime,
             brightness: Brightness.dark),
-        textTheme: TextTheme()),
+        textTheme: TextTheme(bodyText1: TextStyle(fontSize: 10))),
   ));
 }
