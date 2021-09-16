@@ -17,9 +17,7 @@ dependencies:
   universal_router:
     path: ../universal_router
 
-  utilities:
-    git:
-      url: https://github.com/keyskull/utilities.git
+  cullen_utilities: 0.1.0
 
   firebase_core: ^1.4.0
   firebase_analytics: ^8.1.1
