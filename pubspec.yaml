@@ -17,7 +17,7 @@ dependencies:
   universal_router:
     path: ../universal_router
 
-  cullen_utilities: 0.1.0
+  cullen_utilities:
 
   firebase_core: ^1.4.0
   firebase_analytics: ^8.1.1
