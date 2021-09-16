@@ -6,7 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:universal_router/route.dart' as router;
+import 'package:universal_router/route.dart';
 
 class FirebaseIntegration {
   static final firebaseAnalytics = FirebaseAnalytics();
@@ -14,7 +14,7 @@ class FirebaseIntegration {
   static final fireStore = FirebaseFirestore.instance;
   initialize() async {
     WidgetsFlutterBinding.ensureInitialized();
-    router.addRoutePathListeners((routePath) {
+    UniversalRouter.addRoutePathListeners((routePath) {
       FirebaseIntegration.firebaseAnalytics
           .setCurrentScreen(
               screenName: routePath.routeName,
