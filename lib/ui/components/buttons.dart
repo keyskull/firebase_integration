@@ -1,7 +1,3 @@
-
-
-
-
 import 'package:flutter/material.dart';
 
 Widget signInButton() {
@@ -68,7 +64,7 @@ Widget googleSignInButton() {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Image(
-              image: AssetImage("assets/google_logo.png",
+              image: AssetImage('assets/google_logo.png',
                   package: 'firebase_integration'),
               height: 35.0),
           Padding(

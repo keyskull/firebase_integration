@@ -39,9 +39,9 @@ class FirebaseIntegration {
       firebaseAnalytics.logAppOpen();
       auth.userChanges().listen((User? user) {
         if (user == null) {
-          print('User is currently signed out!');
+          log('User is currently signed out!');
         } else {
-          print('User is signed in!');
+          log('User is signed in!');
         }
       });
     });
