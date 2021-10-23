@@ -18,13 +18,10 @@ class FirebaseIntegration {
   static final fireStore = FirebaseFirestore.instance;
   initialize() async {
     WidgetsFlutterBinding.ensureInitialized();
-    UniversalRouter.addRoutePathListeners((routePath) {
+    UniversalRouter.addRoutePathChangingListeners((routePath) {
       logger.i('RoutePathListeners run.');
       FirebaseIntegration.firebaseAnalytics
-          .setCurrentScreen(
-              screenName: routePath.routeName,
-              screenClassOverride:
-                  routePath.getRouteInstance.getPage().runtimeType.toString())
+          .setCurrentScreen(screenName: routePath.routeName)
           .then((value) => log(
               'firebaseAnalytics.setCurrentScreen(screenName: ${routePath.routeName})',
               name: 'firebaseAnalytics.setCurrentScreen'))
