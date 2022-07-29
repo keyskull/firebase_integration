@@ -1,9 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:localization/generated/l10n.dart';
 import 'package:universal_router/route.dart';
 
-import '../components/buttons.dart';
 
 class Login extends StatelessWidget {
   @override
@@ -11,8 +9,8 @@ class Login extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        signInButton(),
-        googleSignInButton(),
+        // signInButton(),
+        // googleSignInButton(),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
